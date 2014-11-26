@@ -111,6 +111,30 @@ my_exe/fast:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/build
 .PHONY : my_exe/fast
 
+src/features/stabilization.o: src/features/stabilization.cpp.o
+.PHONY : src/features/stabilization.o
+
+# target to build an object file
+src/features/stabilization.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.o
+.PHONY : src/features/stabilization.cpp.o
+
+src/features/stabilization.i: src/features/stabilization.cpp.i
+.PHONY : src/features/stabilization.i
+
+# target to preprocess a source file
+src/features/stabilization.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.i
+.PHONY : src/features/stabilization.cpp.i
+
+src/features/stabilization.s: src/features/stabilization.cpp.s
+.PHONY : src/features/stabilization.s
+
+# target to generate assembly for a file
+src/features/stabilization.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.s
+.PHONY : src/features/stabilization.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -135,29 +159,29 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/stabilization.o: src/stabilization.cpp.o
-.PHONY : src/stabilization.o
+src/utilities/videoRead.o: src/utilities/videoRead.cpp.o
+.PHONY : src/utilities/videoRead.o
 
 # target to build an object file
-src/stabilization.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.o
-.PHONY : src/stabilization.cpp.o
+src/utilities/videoRead.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o
+.PHONY : src/utilities/videoRead.cpp.o
 
-src/stabilization.i: src/stabilization.cpp.i
-.PHONY : src/stabilization.i
+src/utilities/videoRead.i: src/utilities/videoRead.cpp.i
+.PHONY : src/utilities/videoRead.i
 
 # target to preprocess a source file
-src/stabilization.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.i
-.PHONY : src/stabilization.cpp.i
+src/utilities/videoRead.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.i
+.PHONY : src/utilities/videoRead.cpp.i
 
-src/stabilization.s: src/stabilization.cpp.s
-.PHONY : src/stabilization.s
+src/utilities/videoRead.s: src/utilities/videoRead.cpp.s
+.PHONY : src/utilities/videoRead.s
 
 # target to generate assembly for a file
-src/stabilization.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.s
-.PHONY : src/stabilization.cpp.s
+src/utilities/videoRead.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.s
+.PHONY : src/utilities/videoRead.cpp.s
 
 # Help Target
 help:
@@ -168,12 +192,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... my_exe"
 	@echo "... rebuild_cache"
+	@echo "... src/features/stabilization.o"
+	@echo "... src/features/stabilization.i"
+	@echo "... src/features/stabilization.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/stabilization.o"
-	@echo "... src/stabilization.i"
-	@echo "... src/stabilization.s"
+	@echo "... src/utilities/videoRead.o"
+	@echo "... src/utilities/videoRead.i"
+	@echo "... src/utilities/videoRead.s"
 .PHONY : help
 
 
