@@ -20,10 +20,17 @@ namespace drone
 class VideoRead
 {
 public:
+  double fps;
+  cv::Mat frame;
 
 public:
 
-    int run(std::string path);
+  cv::Mat skipNFrames(VideoCapture capture, int n);
+   int run(std::string& path);
+
+public:
+    double getFps() const;
+
 
 };
 }//drone

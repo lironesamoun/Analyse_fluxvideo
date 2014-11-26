@@ -3,7 +3,26 @@
 namespace drone
 {
 
-int VideoRead::run(std::string path){
+cv::Mat VideoRead::skipNFrames(VideoCapture capture, int n)
+{
+    cv::Mat frame;
+    cv::Mat temp;
+
+              return temp; capture.set(CV_CAP_PROP_POS_MSEC,3000);
+              capture>>frame;
+              std::cout << "ok" << std::endl;
+              temp = frame.clone();
+
+
+
+
+
+}
+
+/**
+  Only read the video
+  **/
+int VideoRead::run(std::string& path){
 
     VideoCapture cap(path); // open the video file for reading
 
@@ -13,27 +32,25 @@ int VideoRead::run(std::string path){
          return -1;
     }
 
-    //cap.set(CV_CAP_PROP_POS_MSEC, 300); //start the video at 300ms
-
-    double fps = cap.get(CV_CAP_PROP_FPS); //get the frames per seconds of the video
+    this->fps = cap.get(CV_CAP_PROP_FPS); //get the frames per seconds of the video
 
      cout << "Frame per seconds : " << fps << endl;
 
-    namedWindow("MyVideo",CV_WINDOW_AUTOSIZE); //create a window called "MyVideo"
+    namedWindow("Video",CV_WINDOW_AUTOSIZE); //create a window called "MyVideo"
 
     while(1)
     {
         Mat frame;
 
         bool bSuccess = cap.read(frame); // read a new frame from video
-
+        cap >> this->frame;
          if (!bSuccess) //if not success, break loop
         {
                         cout << "Cannot read the frame from video file" << endl;
                        break;
         }
 
-        imshow("MyVideo", frame); //show the frame in "MyVideo" window
+        imshow("Video", frame); //show the frame in "Video" window
 
         if(waitKey(30) == 27) //wait for 'esc' key press for 30 ms. If 'esc' key is pressed, break loop
        {
@@ -43,6 +60,10 @@ int VideoRead::run(std::string path){
     }
 
     return 0;
+}
+
+double VideoRead::getFps() const{
+    return this->fps;
 }
 
 }
