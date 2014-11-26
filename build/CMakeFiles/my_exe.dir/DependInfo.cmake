@@ -5,6 +5,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/main.cpp.o"
+  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/stabilization.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

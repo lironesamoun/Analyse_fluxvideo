@@ -135,6 +135,30 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/stabilization.o: src/stabilization.cpp.o
+.PHONY : src/stabilization.o
+
+# target to build an object file
+src/stabilization.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.o
+.PHONY : src/stabilization.cpp.o
+
+src/stabilization.i: src/stabilization.cpp.i
+.PHONY : src/stabilization.i
+
+# target to preprocess a source file
+src/stabilization.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.i
+.PHONY : src/stabilization.cpp.i
+
+src/stabilization.s: src/stabilization.cpp.s
+.PHONY : src/stabilization.s
+
+# target to generate assembly for a file
+src/stabilization.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.s
+.PHONY : src/stabilization.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -147,6 +171,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/stabilization.o"
+	@echo "... src/stabilization.i"
+	@echo "... src/stabilization.s"
 .PHONY : help
 
 

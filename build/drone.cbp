@@ -96,6 +96,10 @@
       </Build>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp">
       </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp">
+      </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.hpp">
+      </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />
       </Unit>

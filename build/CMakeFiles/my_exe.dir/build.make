@@ -49,9 +49,32 @@ include CMakeFiles/my_exe.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/my_exe.dir/flags.make
 
+CMakeFiles/my_exe.dir/src/stabilization.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/stabilization.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/stabilization.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/stabilization.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp
+
+CMakeFiles/my_exe.dir/src/stabilization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/stabilization.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp > CMakeFiles/my_exe.dir/src/stabilization.cpp.i
+
+CMakeFiles/my_exe.dir/src/stabilization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/stabilization.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/stabilization.cpp -o CMakeFiles/my_exe.dir/src/stabilization.cpp.s
+
+CMakeFiles/my_exe.dir/src/stabilization.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/stabilization.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/stabilization.cpp.o.provides: CMakeFiles/my_exe.dir/src/stabilization.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/stabilization.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/stabilization.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/stabilization.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/stabilization.cpp.o
+
 CMakeFiles/my_exe.dir/src/main.cpp.o: CMakeFiles/my_exe.dir/flags.make
 CMakeFiles/my_exe.dir/src/main.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/main.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp
 
@@ -74,11 +97,13 @@ CMakeFiles/my_exe.dir/src/main.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/m
 
 # Object files for target my_exe
 my_exe_OBJECTS = \
+"CMakeFiles/my_exe.dir/src/stabilization.cpp.o" \
 "CMakeFiles/my_exe.dir/src/main.cpp.o"
 
 # External object files for target my_exe
 my_exe_EXTERNAL_OBJECTS =
 
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/stabilization.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/main.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/build.make
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/link.txt
@@ -89,6 +114,7 @@ my_exe_EXTERNAL_OBJECTS =
 CMakeFiles/my_exe.dir/build: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe
 .PHONY : CMakeFiles/my_exe.dir/build
 
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/stabilization.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/main.cpp.o.requires
 .PHONY : CMakeFiles/my_exe.dir/requires
 
