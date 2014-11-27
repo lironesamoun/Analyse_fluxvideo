@@ -8,6 +8,7 @@
 #include "fstream"
 #include "iostream"
 #include "utilities/videoRead.hpp"
+#include "Debug/timer.hpp"
 
 
 using namespace cv;
@@ -17,6 +18,8 @@ using namespace drone;
 int main(int argc, char *argv[])
 {
 
+       Timer timer;
+       timer.startTimer();
        string path="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
        VideoCapture cap(path); // open the video file for reading
        Mat temp,temp1;
@@ -55,6 +58,8 @@ int main(int argc, char *argv[])
                    break;
           }
        }
+       timer.stopTimer();
+       timer.getTime();
        return 0;
 
 

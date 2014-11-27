@@ -6,45 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp
-opencv2/core/core.hpp
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/../src/Debug/debug.hpp
+iostream
 -
-opencv/cv.h
+iomanip
 -
-opencv2/features2d/features2d.hpp
+cstdlib
 -
-opencv2/imgproc/imgproc.hpp
+stdio.h
 -
-opencv2/highgui/highgui.hpp
+sstream
 -
 string
 -
 vector
 -
-fstream
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/fstream
-iostream
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/iostream
-utilities/videoRead.hpp
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp
 
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp
-opencv2/core/core.hpp
--
-opencv/cv.h
--
-opencv2/features2d/features2d.hpp
--
-opencv2/imgproc/imgproc.hpp
--
-opencv2/highgui/highgui.hpp
--
-string
--
-vector
--
-fstream
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/fstream
-iostream
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/iostream
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp
+../src/Debug/debug.hpp
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/../src/Debug/debug.hpp
 

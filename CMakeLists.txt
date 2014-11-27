@@ -2,6 +2,7 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 2.6)
 SET(KEYWORD video_processing)
 
+
 # Start a project
 PROJECT(drone)
 

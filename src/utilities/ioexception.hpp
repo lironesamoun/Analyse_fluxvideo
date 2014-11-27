@@ -4,7 +4,7 @@
 #include <exception>
 #include <stdexcept>
 
-namespace ssm{
+namespace drone{
 class IOException:runtime_error
 {
 private:

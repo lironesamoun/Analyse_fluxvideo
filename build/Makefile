@@ -111,6 +111,54 @@ my_exe/fast:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/build
 .PHONY : my_exe/fast
 
+src/Debug/debug.o: src/Debug/debug.cpp.o
+.PHONY : src/Debug/debug.o
+
+# target to build an object file
+src/Debug/debug.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o
+.PHONY : src/Debug/debug.cpp.o
+
+src/Debug/debug.i: src/Debug/debug.cpp.i
+.PHONY : src/Debug/debug.i
+
+# target to preprocess a source file
+src/Debug/debug.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/debug.cpp.i
+.PHONY : src/Debug/debug.cpp.i
+
+src/Debug/debug.s: src/Debug/debug.cpp.s
+.PHONY : src/Debug/debug.s
+
+# target to generate assembly for a file
+src/Debug/debug.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/debug.cpp.s
+.PHONY : src/Debug/debug.cpp.s
+
+src/Debug/timer.o: src/Debug/timer.cpp.o
+.PHONY : src/Debug/timer.o
+
+# target to build an object file
+src/Debug/timer.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
+.PHONY : src/Debug/timer.cpp.o
+
+src/Debug/timer.i: src/Debug/timer.cpp.i
+.PHONY : src/Debug/timer.i
+
+# target to preprocess a source file
+src/Debug/timer.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.i
+.PHONY : src/Debug/timer.cpp.i
+
+src/Debug/timer.s: src/Debug/timer.cpp.s
+.PHONY : src/Debug/timer.s
+
+# target to generate assembly for a file
+src/Debug/timer.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
+.PHONY : src/Debug/timer.cpp.s
+
 src/features/stabilization.o: src/features/stabilization.cpp.o
 .PHONY : src/features/stabilization.o
 
@@ -192,6 +240,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... my_exe"
 	@echo "... rebuild_cache"
+	@echo "... src/Debug/debug.o"
+	@echo "... src/Debug/debug.i"
+	@echo "... src/Debug/debug.s"
+	@echo "... src/Debug/timer.o"
+	@echo "... src/Debug/timer.i"
+	@echo "... src/Debug/timer.s"
 	@echo "... src/features/stabilization.o"
 	@echo "... src/features/stabilization.i"
 	@echo "... src/features/stabilization.s"

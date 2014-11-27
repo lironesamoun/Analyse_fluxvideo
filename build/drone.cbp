@@ -94,11 +94,19 @@
          </MakeCommands>
       </Target>
       </Build>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp">
+      </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp">
+      </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.cpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp">
+      </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.hpp">
+      </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.hpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.hpp">
       </Unit>
