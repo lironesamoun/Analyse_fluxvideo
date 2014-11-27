@@ -9,6 +9,7 @@
 #include "iostream"
 #include "utilities/videoRead.hpp"
 #include "Debug/timer.hpp"
+#include "Debug/debug.hpp"
 
 
 using namespace cv;
@@ -18,6 +19,7 @@ using namespace drone;
 int main(int argc, char *argv[])
 {
 
+    Debug::trace("Titit trace");
        Timer timer;
        timer.startTimer();
        string path="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";

@@ -14,9 +14,11 @@
 #define LOGE printf
 
 namespace drone {
-void ssm_debug(const int level, const std::string& what);
-void ssm_error(const std::string& what);
-void ssm_warning(const std::string& what);
+
+void ensure_error(const char* file, const int line, const char* function, const char* what, int code=-1);
+void fatal_error(const char* file, const int line, const char* function,const char* what, int code=-1);
+void drone_error(const std::string& what);
+void drone_warning(const std::string& what);
 
 /**
   * This function converts any class or data type to a string. In C++11,
@@ -44,44 +46,7 @@ template <class T> std::string to_string( const std::vector<T> &t )
 class Debug{
 
 public:
-    static const int DEBUG_OFF=0;
-    static const int DEBUG_ERROR=1;
-    static const int DEBUG_WARNING=2;
-    static const int DEBUG_INFO=3;
-    static const int DEBUG_DEBUG=4;
-    static const int DEBUG_TRACE=5;
-    static const int DEBUG_LOWLEVEL=6;
 
-private:
-    static int DEBUG_LEVEL;
-public:
-    static void enabledErrorLevel(){
-        DEBUG_LEVEL=DEBUG_ERROR;
-    }
-    static void enabledWarningLevel(){
-        DEBUG_LEVEL=DEBUG_WARNING;
-    }
-    static void enabledInfoLevel(){
-        DEBUG_LEVEL=DEBUG_INFO;
-    }
-    static void enabledDebugLevel(){
-        DEBUG_LEVEL=DEBUG_DEBUG;
-    }
-    static void enabledTraceLevel(){
-        DEBUG_LEVEL=DEBUG_TRACE;
-    }
-    static void enabledLowLevel(){
-        DEBUG_LEVEL=DEBUG_LOWLEVEL;
-    }
-    static void disabledDebug(){
-        DEBUG_LEVEL=DEBUG_OFF;
-    }
-    static void setDebugLevel(int debug_level){
-        DEBUG_LEVEL=debug_level;
-    }
-    static int getDebugLevel(){
-        return DEBUG_LEVEL;
-    }
     static void error(const std::string &  msg);
     static void warning(const std::string &  msg);
     static void info(const std::string &  msg);
