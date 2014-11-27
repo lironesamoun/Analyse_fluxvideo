@@ -4,9 +4,12 @@
 #include <exception>
 #include <stdexcept>
 
+using namespace std;
 namespace drone{
+
 class IOException:runtime_error
 {
+
 private:
     const char * m_message;
 public:

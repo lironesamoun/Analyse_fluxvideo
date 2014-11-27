@@ -98,9 +98,9 @@
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.cpp">
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp">
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp">
       </Unit>
@@ -108,7 +108,9 @@
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.hpp">
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.hpp">
+      </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/drone.hpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/ioexception.hpp">
       </Unit>

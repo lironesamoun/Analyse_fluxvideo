@@ -159,53 +159,53 @@ src/Debug/timer.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
 .PHONY : src/Debug/timer.cpp.s
 
-src/features/stabilization.o: src/features/stabilization.cpp.o
-.PHONY : src/features/stabilization.o
+src/core/features/stabilization.o: src/core/features/stabilization.cpp.o
+.PHONY : src/core/features/stabilization.o
 
 # target to build an object file
-src/features/stabilization.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.o
-.PHONY : src/features/stabilization.cpp.o
+src/core/features/stabilization.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o
+.PHONY : src/core/features/stabilization.cpp.o
 
-src/features/stabilization.i: src/features/stabilization.cpp.i
-.PHONY : src/features/stabilization.i
+src/core/features/stabilization.i: src/core/features/stabilization.cpp.i
+.PHONY : src/core/features/stabilization.i
 
 # target to preprocess a source file
-src/features/stabilization.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.i
-.PHONY : src/features/stabilization.cpp.i
+src/core/features/stabilization.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.i
+.PHONY : src/core/features/stabilization.cpp.i
 
-src/features/stabilization.s: src/features/stabilization.cpp.s
-.PHONY : src/features/stabilization.s
+src/core/features/stabilization.s: src/core/features/stabilization.cpp.s
+.PHONY : src/core/features/stabilization.s
 
 # target to generate assembly for a file
-src/features/stabilization.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/features/stabilization.cpp.s
-.PHONY : src/features/stabilization.cpp.s
+src/core/features/stabilization.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s
+.PHONY : src/core/features/stabilization.cpp.s
 
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
+src/test/main.o: src/test/main.cpp.o
+.PHONY : src/test/main.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/test/main.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/test/main.cpp.o
+.PHONY : src/test/main.cpp.o
 
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
+src/test/main.i: src/test/main.cpp.i
+.PHONY : src/test/main.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/test/main.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/test/main.cpp.i
+.PHONY : src/test/main.cpp.i
 
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
+src/test/main.s: src/test/main.cpp.s
+.PHONY : src/test/main.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/test/main.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/test/main.cpp.s
+.PHONY : src/test/main.cpp.s
 
 src/utilities/videoRead.o: src/utilities/videoRead.cpp.o
 .PHONY : src/utilities/videoRead.o
@@ -246,12 +246,12 @@ help:
 	@echo "... src/Debug/timer.o"
 	@echo "... src/Debug/timer.i"
 	@echo "... src/Debug/timer.s"
-	@echo "... src/features/stabilization.o"
-	@echo "... src/features/stabilization.i"
-	@echo "... src/features/stabilization.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/core/features/stabilization.o"
+	@echo "... src/core/features/stabilization.i"
+	@echo "... src/core/features/stabilization.s"
+	@echo "... src/test/main.o"
+	@echo "... src/test/main.i"
+	@echo "... src/test/main.s"
 	@echo "... src/utilities/videoRead.o"
 	@echo "... src/utilities/videoRead.i"
 	@echo "... src/utilities/videoRead.s"

@@ -6,8 +6,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
 SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o"
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/features/stabilization.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/main.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/main.cpp.o"
+  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o"
+  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/test/main.cpp.o"
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
