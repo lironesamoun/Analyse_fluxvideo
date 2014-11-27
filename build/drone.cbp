@@ -102,6 +102,8 @@
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/features/stabilization.hpp">
       </Unit>
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/ioexception.hpp">
+      </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/CMakeLists.txt">
