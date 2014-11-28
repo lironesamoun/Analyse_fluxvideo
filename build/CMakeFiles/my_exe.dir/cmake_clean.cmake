@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o"
   "CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o"
-  "CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o"
+  "CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o"
   "CMakeFiles/my_exe.dir/src/test/main.cpp.o"
   "CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o"
   "CMakeFiles/my_exe.dir/src/core/image.cpp.o"

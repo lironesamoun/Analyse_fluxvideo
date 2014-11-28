@@ -104,7 +104,7 @@
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp">
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.hpp">
       </Unit>
@@ -118,7 +118,7 @@
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/ioexception.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp">
+      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.hpp">
       </Unit>
       <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />

@@ -231,29 +231,29 @@ src/test/main.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/test/main.cpp.s
 .PHONY : src/test/main.cpp.s
 
-src/utilities/videoRead.o: src/utilities/videoRead.cpp.o
-.PHONY : src/utilities/videoRead.o
+src/utilities/videoUtil.o: src/utilities/videoUtil.cpp.o
+.PHONY : src/utilities/videoUtil.o
 
 # target to build an object file
-src/utilities/videoRead.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o
-.PHONY : src/utilities/videoRead.cpp.o
+src/utilities/videoUtil.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
+.PHONY : src/utilities/videoUtil.cpp.o
 
-src/utilities/videoRead.i: src/utilities/videoRead.cpp.i
-.PHONY : src/utilities/videoRead.i
+src/utilities/videoUtil.i: src/utilities/videoUtil.cpp.i
+.PHONY : src/utilities/videoUtil.i
 
 # target to preprocess a source file
-src/utilities/videoRead.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.i
-.PHONY : src/utilities/videoRead.cpp.i
+src/utilities/videoUtil.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i
+.PHONY : src/utilities/videoUtil.cpp.i
 
-src/utilities/videoRead.s: src/utilities/videoRead.cpp.s
-.PHONY : src/utilities/videoRead.s
+src/utilities/videoUtil.s: src/utilities/videoUtil.cpp.s
+.PHONY : src/utilities/videoUtil.s
 
 # target to generate assembly for a file
-src/utilities/videoRead.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.s
-.PHONY : src/utilities/videoRead.cpp.s
+src/utilities/videoUtil.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s
+.PHONY : src/utilities/videoUtil.cpp.s
 
 # Help Target
 help:
@@ -279,9 +279,9 @@ help:
 	@echo "... src/test/main.o"
 	@echo "... src/test/main.i"
 	@echo "... src/test/main.s"
-	@echo "... src/utilities/videoRead.o"
-	@echo "... src/utilities/videoRead.i"
-	@echo "... src/utilities/videoRead.s"
+	@echo "... src/utilities/videoUtil.o"
+	@echo "... src/utilities/videoUtil.i"
+	@echo "... src/utilities/videoUtil.s"
 .PHONY : help
 
 

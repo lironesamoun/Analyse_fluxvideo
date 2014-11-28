@@ -95,28 +95,28 @@ CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.provides: CMakeFiles/my_exe.dir/src/
 
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp > CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.i
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp > CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.cpp -o CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.s
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.requires:
-.PHONY : CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.requires
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.provides: CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.requires
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.provides.build
-.PHONY : CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.provides
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides
 
-CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.o: CMakeFiles/my_exe.dir/flags.make
 CMakeFiles/my_exe.dir/src/test/main.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp
@@ -191,7 +191,7 @@ CMakeFiles/my_exe.dir/src/core/image.cpp.o.provides.build: CMakeFiles/my_exe.dir
 my_exe_OBJECTS = \
 "CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o" \
 "CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o" \
-"CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o" \
+"CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o" \
 "CMakeFiles/my_exe.dir/src/test/main.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/image.cpp.o"
@@ -201,7 +201,7 @@ my_exe_EXTERNAL_OBJECTS =
 
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/test/main.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/image.cpp.o
@@ -216,7 +216,7 @@ CMakeFiles/my_exe.dir/build: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/cod
 
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.requires
-CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/test/main.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/image.cpp.o.requires

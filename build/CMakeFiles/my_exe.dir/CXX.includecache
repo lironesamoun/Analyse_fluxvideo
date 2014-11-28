@@ -73,8 +73,8 @@ Debug/timer.hpp
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.hpp
 utilities/ioexception.hpp
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/ioexception.hpp
-utilities/videoRead.hpp
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp
+utilities/videoUtil.hpp
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.hpp
 
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp
 drone.hpp
@@ -88,7 +88,7 @@ exception
 stdexcept
 -
 
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoRead.hpp
+/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.hpp
 drone.hpp
 /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/drone.hpp
 
