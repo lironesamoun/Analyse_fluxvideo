@@ -4,6 +4,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/my_exe.dir/src/utilities/videoRead.cpp.o"
   "CMakeFiles/my_exe.dir/src/test/main.cpp.o"
   "CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o"
+  "CMakeFiles/my_exe.dir/src/core/image.cpp.o"
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe.pdb"
   "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe"
 )

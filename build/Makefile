@@ -183,6 +183,30 @@ src/core/features/stabilization.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s
 .PHONY : src/core/features/stabilization.cpp.s
 
+src/core/image.o: src/core/image.cpp.o
+.PHONY : src/core/image.o
+
+# target to build an object file
+src/core/image.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/image.cpp.o
+.PHONY : src/core/image.cpp.o
+
+src/core/image.i: src/core/image.cpp.i
+.PHONY : src/core/image.i
+
+# target to preprocess a source file
+src/core/image.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/image.cpp.i
+.PHONY : src/core/image.cpp.i
+
+src/core/image.s: src/core/image.cpp.s
+.PHONY : src/core/image.s
+
+# target to generate assembly for a file
+src/core/image.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/image.cpp.s
+.PHONY : src/core/image.cpp.s
+
 src/test/main.o: src/test/main.cpp.o
 .PHONY : src/test/main.o
 
@@ -249,6 +273,9 @@ help:
 	@echo "... src/core/features/stabilization.o"
 	@echo "... src/core/features/stabilization.i"
 	@echo "... src/core/features/stabilization.s"
+	@echo "... src/core/image.o"
+	@echo "... src/core/image.i"
+	@echo "... src/core/image.s"
 	@echo "... src/test/main.o"
 	@echo "... src/test/main.i"
 	@echo "... src/test/main.s"

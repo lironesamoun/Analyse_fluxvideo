@@ -17,7 +17,7 @@ public:
 
 public:
 
-  cv::Mat skipNFrames(VideoCapture capture, int n);
+  cv::Mat skipNFrames(VideoCapture &cap, Mat &frame, int n);
    int run(std::string& path);
 
 public:

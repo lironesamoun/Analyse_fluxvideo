@@ -3,20 +3,17 @@
 namespace drone
 {
 
-cv::Mat VideoRead::skipNFrames(VideoCapture capture, int n)
+/// Not working
+cv::Mat VideoRead::skipNFrames(VideoCapture& cap,cv::Mat& frame, int n)
 {
-    cv::Mat frame;
     cv::Mat temp;
+    int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
+    Debug::info("Current frame: " + nbreCurrentFrame);
+    if (nbreCurrentFrame%(n)==0){
+        temp=frame.clone();
+    }
 
-              return temp; capture.set(CV_CAP_PROP_POS_MSEC,3000);
-              capture>>frame;
-              std::cout << "ok" << std::endl;
-              temp = frame.clone();
-
-
-
-
-
+    return temp;
 }
 
 /**
