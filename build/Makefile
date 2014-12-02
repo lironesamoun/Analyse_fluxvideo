@@ -39,7 +39,7 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code
+CMAKE_SOURCE_DIR = /home/user/Documents/pfe_code
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build
@@ -159,29 +159,53 @@ src/Debug/timer.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
 .PHONY : src/Debug/timer.cpp.s
 
-src/core/features/stabilization.o: src/core/features/stabilization.cpp.o
-.PHONY : src/core/features/stabilization.o
+src/core/features/stabilizationOpenCv.o: src/core/features/stabilizationOpenCv.cpp.o
+.PHONY : src/core/features/stabilizationOpenCv.o
 
 # target to build an object file
-src/core/features/stabilization.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o
-.PHONY : src/core/features/stabilization.cpp.o
+src/core/features/stabilizationOpenCv.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o
+.PHONY : src/core/features/stabilizationOpenCv.cpp.o
 
-src/core/features/stabilization.i: src/core/features/stabilization.cpp.i
-.PHONY : src/core/features/stabilization.i
+src/core/features/stabilizationOpenCv.i: src/core/features/stabilizationOpenCv.cpp.i
+.PHONY : src/core/features/stabilizationOpenCv.i
 
 # target to preprocess a source file
-src/core/features/stabilization.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.i
-.PHONY : src/core/features/stabilization.cpp.i
+src/core/features/stabilizationOpenCv.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.i
+.PHONY : src/core/features/stabilizationOpenCv.cpp.i
 
-src/core/features/stabilization.s: src/core/features/stabilization.cpp.s
-.PHONY : src/core/features/stabilization.s
+src/core/features/stabilizationOpenCv.s: src/core/features/stabilizationOpenCv.cpp.s
+.PHONY : src/core/features/stabilizationOpenCv.s
 
 # target to generate assembly for a file
-src/core/features/stabilization.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s
-.PHONY : src/core/features/stabilization.cpp.s
+src/core/features/stabilizationOpenCv.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.s
+.PHONY : src/core/features/stabilizationOpenCv.cpp.s
+
+src/core/features/stabilizationSimple.o: src/core/features/stabilizationSimple.cpp.o
+.PHONY : src/core/features/stabilizationSimple.o
+
+# target to build an object file
+src/core/features/stabilizationSimple.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
+.PHONY : src/core/features/stabilizationSimple.cpp.o
+
+src/core/features/stabilizationSimple.i: src/core/features/stabilizationSimple.cpp.i
+.PHONY : src/core/features/stabilizationSimple.i
+
+# target to preprocess a source file
+src/core/features/stabilizationSimple.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.i
+.PHONY : src/core/features/stabilizationSimple.cpp.i
+
+src/core/features/stabilizationSimple.s: src/core/features/stabilizationSimple.cpp.s
+.PHONY : src/core/features/stabilizationSimple.s
+
+# target to generate assembly for a file
+src/core/features/stabilizationSimple.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s
+.PHONY : src/core/features/stabilizationSimple.cpp.s
 
 src/core/image.o: src/core/image.cpp.o
 .PHONY : src/core/image.o
@@ -270,9 +294,12 @@ help:
 	@echo "... src/Debug/timer.o"
 	@echo "... src/Debug/timer.i"
 	@echo "... src/Debug/timer.s"
-	@echo "... src/core/features/stabilization.o"
-	@echo "... src/core/features/stabilization.i"
-	@echo "... src/core/features/stabilization.s"
+	@echo "... src/core/features/stabilizationOpenCv.o"
+	@echo "... src/core/features/stabilizationOpenCv.i"
+	@echo "... src/core/features/stabilizationOpenCv.s"
+	@echo "... src/core/features/stabilizationSimple.o"
+	@echo "... src/core/features/stabilizationSimple.i"
+	@echo "... src/core/features/stabilizationSimple.s"
 	@echo "... src/core/image.o"
 	@echo "... src/core/image.i"
 	@echo "... src/core/image.s"

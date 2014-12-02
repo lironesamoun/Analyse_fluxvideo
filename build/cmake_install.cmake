@@ -1,4 +1,4 @@
-# Install script for directory: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code
+# Install script for directory: /home/user/Documents/pfe_code
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

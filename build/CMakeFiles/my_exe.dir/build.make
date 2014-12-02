@@ -35,7 +35,7 @@ RM = /usr/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code
+CMAKE_SOURCE_DIR = /home/user/Documents/pfe_code
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build
@@ -50,18 +50,18 @@ include CMakeFiles/my_exe.dir/progress.make
 include CMakeFiles/my_exe.dir/flags.make
 
 CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp
+CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o: /home/user/Documents/pfe_code/src/Debug/debug.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o -c /home/user/Documents/pfe_code/src/Debug/debug.cpp
 
 CMakeFiles/my_exe.dir/src/Debug/debug.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/Debug/debug.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp > CMakeFiles/my_exe.dir/src/Debug/debug.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/Debug/debug.cpp > CMakeFiles/my_exe.dir/src/Debug/debug.cpp.i
 
 CMakeFiles/my_exe.dir/src/Debug/debug.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/Debug/debug.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp -o CMakeFiles/my_exe.dir/src/Debug/debug.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/Debug/debug.cpp -o CMakeFiles/my_exe.dir/src/Debug/debug.cpp.s
 
 CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.requires:
 .PHONY : CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.requires
@@ -73,18 +73,18 @@ CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.provides: CMakeFiles/my_exe.dir/src/
 CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o
 
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp
+CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o: /home/user/Documents/pfe_code/src/Debug/timer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o -c /home/user/Documents/pfe_code/src/Debug/timer.cpp
 
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/Debug/timer.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp > CMakeFiles/my_exe.dir/src/Debug/timer.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/Debug/timer.cpp > CMakeFiles/my_exe.dir/src/Debug/timer.cpp.i
 
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp -o CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/Debug/timer.cpp -o CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
 
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.requires:
 .PHONY : CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.requires
@@ -96,18 +96,18 @@ CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.provides: CMakeFiles/my_exe.dir/src/
 CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
 
 CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp
+CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o: /home/user/Documents/pfe_code/src/utilities/videoUtil.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o -c /home/user/Documents/pfe_code/src/utilities/videoUtil.cpp
 
 CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp > CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/utilities/videoUtil.cpp > CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.i
 
 CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/utilities/videoUtil.cpp -o CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.s
 
 CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires:
 .PHONY : CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
@@ -119,18 +119,18 @@ CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides: CMakeFiles/my_exe.
 CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/test/main.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp
+CMakeFiles/my_exe.dir/src/test/main.cpp.o: /home/user/Documents/pfe_code/src/test/main.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/test/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/test/main.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/test/main.cpp.o -c /home/user/Documents/pfe_code/src/test/main.cpp
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/test/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp > CMakeFiles/my_exe.dir/src/test/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/test/main.cpp > CMakeFiles/my_exe.dir/src/test/main.cpp.i
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/test/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp -o CMakeFiles/my_exe.dir/src/test/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/test/main.cpp -o CMakeFiles/my_exe.dir/src/test/main.cpp.s
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.o.requires:
 .PHONY : CMakeFiles/my_exe.dir/src/test/main.cpp.o.requires
@@ -141,42 +141,65 @@ CMakeFiles/my_exe.dir/src/test/main.cpp.o.provides: CMakeFiles/my_exe.dir/src/te
 
 CMakeFiles/my_exe.dir/src/test/main.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/test/main.cpp.o
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.i
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.i
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.s
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.s
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.requires:
-.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.requires
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.requires
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.requires
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.provides.build
-.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.provides
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides
 
-CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o
+CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.i
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
 
 CMakeFiles/my_exe.dir/src/core/image.cpp.o: CMakeFiles/my_exe.dir/flags.make
-CMakeFiles/my_exe.dir/src/core/image.cpp.o: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_6)
+CMakeFiles/my_exe.dir/src/core/image.cpp.o: /home/user/Documents/pfe_code/src/core/image.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/image.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/image.cpp.o -c /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/image.cpp.o -c /home/user/Documents/pfe_code/src/core/image.cpp
 
 CMakeFiles/my_exe.dir/src/core/image.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/image.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp > CMakeFiles/my_exe.dir/src/core/image.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/image.cpp > CMakeFiles/my_exe.dir/src/core/image.cpp.i
 
 CMakeFiles/my_exe.dir/src/core/image.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/image.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp -o CMakeFiles/my_exe.dir/src/core/image.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/image.cpp -o CMakeFiles/my_exe.dir/src/core/image.cpp.s
 
 CMakeFiles/my_exe.dir/src/core/image.cpp.o.requires:
 .PHONY : CMakeFiles/my_exe.dir/src/core/image.cpp.o.requires
@@ -193,32 +216,68 @@ my_exe_OBJECTS = \
 "CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o" \
 "CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o" \
 "CMakeFiles/my_exe.dir/src/test/main.cpp.o" \
-"CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/image.cpp.o"
 
 # External object files for target my_exe
 my_exe_EXTERNAL_OBJECTS =
 
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/test/main.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/image.cpp.o
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/build.make
-/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe: CMakeFiles/my_exe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe"
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/test/main.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/image.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_videostab.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_video.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_ts.a
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_superres.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_stitching.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_photo.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_ocl.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_objdetect.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_nonfree.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_ml.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_legacy.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_imgproc.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_highgui.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_gpu.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_flann.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_features2d.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_core.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_contrib.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_calib3d.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_nonfree.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_ocl.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_gpu.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_photo.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_objdetect.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_legacy.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_video.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_ml.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_calib3d.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_features2d.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_highgui.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_imgproc.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_flann.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_core.so.2.4.9
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/build.make
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable /home/user/Documents/pfe_code/bin/my_exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/my_exe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/my_exe.dir/build: /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe
+CMakeFiles/my_exe.dir/build: /home/user/Documents/pfe_code/bin/my_exe
 .PHONY : CMakeFiles/my_exe.dir/build
 
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/test/main.cpp.o.requires
-CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/image.cpp.o.requires
 .PHONY : CMakeFiles/my_exe.dir/requires
 
@@ -227,6 +286,6 @@ CMakeFiles/my_exe.dir/clean:
 .PHONY : CMakeFiles/my_exe.dir/clean
 
 CMakeFiles/my_exe.dir/depend:
-	cd /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code /home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/user/Documents/pfe_code /home/user/Documents/pfe_code /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/my_exe.dir/depend
 

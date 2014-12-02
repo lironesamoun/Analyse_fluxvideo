@@ -5,7 +5,7 @@
       <Option title="drone" />
       <Option makefile_is_custom="1" />
       <Option compiler="gcc" />
-      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\usr\share\;CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\;" />
+      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;" />
       <Build>
       <Target title="all">
          <Option working_dir="/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build" />
@@ -18,8 +18,8 @@
          </MakeCommands>
       </Target>
       <Target title="my_exe">
-         <Option output="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/" />
+         <Option output="/home/user/Documents/pfe_code/bin/my_exe" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/user/Documents/pfe_code/bin/" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
@@ -29,12 +29,11 @@
             <Add option="-DQT_GUI_LIB" />
             <Add option="-DQT_CORE_LIB" />
             <Add directory="/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build" />
-            <Add directory="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src" />
+            <Add directory="/home/user/Documents/pfe_code/src" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.6" />
             <Add directory="/usr/include/c++/4.6/backward" />
             <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
-            <Add directory="/usr/include/opencv" />
             <Add directory="/usr/include/qt4" />
             <Add directory="/usr/include/qt4/QtCore" />
             <Add directory="/usr/include/qt4/QtGui" />
@@ -42,6 +41,7 @@
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
             <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
          </Compiler>
          <MakeCommands>
             <Build command="/usr/bin/make -f &quot;/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/Makefile&quot;  VERBOSE=1 my_exe" />
@@ -51,8 +51,8 @@
          </MakeCommands>
       </Target>
       <Target title="my_exe/fast">
-         <Option output="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/my_exe" prefix_auto="0" extension_auto="0" />
-         <Option working_dir="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/bin/" />
+         <Option output="/home/user/Documents/pfe_code/bin/my_exe" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/user/Documents/pfe_code/bin/" />
          <Option object_output="./" />
          <Option type="1" />
          <Option compiler="gcc" />
@@ -62,12 +62,11 @@
             <Add option="-DQT_GUI_LIB" />
             <Add option="-DQT_CORE_LIB" />
             <Add directory="/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build" />
-            <Add directory="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src" />
+            <Add directory="/home/user/Documents/pfe_code/src" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.6" />
             <Add directory="/usr/include/c++/4.6/backward" />
             <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
-            <Add directory="/usr/include/opencv" />
             <Add directory="/usr/include/qt4" />
             <Add directory="/usr/include/qt4/QtCore" />
             <Add directory="/usr/include/qt4/QtGui" />
@@ -75,6 +74,7 @@
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
             <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
          </Compiler>
          <MakeCommands>
             <Build command="/usr/bin/make -f &quot;/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/Makefile&quot;  VERBOSE=1 my_exe/fast" />
@@ -94,40 +94,50 @@
          </MakeCommands>
       </Target>
       </Build>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/Debug/debug.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/Debug/timer.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/image.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/test/main.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/utilities/videoUtil.cpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/Debug/debug.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/Debug/timer.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/drone.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimple.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/ioexception.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/image.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/drone.hpp">
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/CMakeLists.txt">
+      <Unit filename="/home/user/Documents/pfe_code/src/utilities/ioexception.hpp">
+      </Unit>
+      <Unit filename="/home/user/Documents/pfe_code/src/utilities/videoUtil.hpp">
+      </Unit>
+      <Unit filename="/home/user/Documents/pfe_code/CMakeLists.txt">
           <Option virtualFolder="CMake Files\" />
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/../../../../../../../usr/share/OpenCV/OpenCVConfig-version.cmake">
-          <Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\" />
+      <Unit filename="/home/user/Documents/pfe_code/../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\" />
       </Unit>
-      <Unit filename="/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/../../../../../../../usr/share/OpenCV/OpenCVConfig.cmake">
-          <Option virtualFolder="CMake Files\..\..\..\..\..\..\..\usr\share\OpenCV\" />
+      <Unit filename="/home/user/Documents/pfe_code/../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/home/user/Documents/pfe_code/../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/home/user/Documents/pfe_code/../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\" />
       </Unit>
    </Project>
 </CodeBlocks_project_file>

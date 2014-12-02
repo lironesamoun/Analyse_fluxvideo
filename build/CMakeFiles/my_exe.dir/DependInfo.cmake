@@ -4,12 +4,13 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/debug.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/Debug/timer.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/features/stabilization.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/features/stabilization.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/core/image.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/image.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/test/main.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/test/main.cpp.o"
-  "/home/user/Dropbox/MAM5/PFE/Analyse_video_drone/code/src/utilities/videoUtil.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o"
+  "/home/user/Documents/pfe_code/src/Debug/debug.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/debug.cpp.o"
+  "/home/user/Documents/pfe_code/src/Debug/timer.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o"
+  "/home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o"
+  "/home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o"
+  "/home/user/Documents/pfe_code/src/core/image.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/core/image.cpp.o"
+  "/home/user/Documents/pfe_code/src/test/main.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/test/main.cpp.o"
+  "/home/user/Documents/pfe_code/src/utilities/videoUtil.cpp" "/home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

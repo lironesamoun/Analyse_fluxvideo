@@ -11,6 +11,7 @@ FIND_PACKAGE(OpenCV REQUIRED) #Need OpenCV
 FIND_PACKAGE(Doxygen) #Pour la documentation
 FIND_PACKAGE(Qt4 REQUIRED) #Need QT4
 
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 # Create bin folder depending on OS
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")

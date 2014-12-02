@@ -17,15 +17,20 @@ cv::Mat skipNFrames(VideoCapture& cap,cv::Mat& frame, int n)
 int main(int argc, char *argv[])
 {
 
-    bool skipFrame=false;
-
     Timer timerMain;
     timerMain.startTimer();
+    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/test.avi";
+    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau5.avi";
+    StabilizationOpenCv stabopenCv(path1,outputPath);
+    stabopenCv.init();
+/*
+    bool skipFrame=false;
+
+
     string path="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
     VideoCapture cap(path); // open the video file for reading
     Mat temp,temp1;
     int stepFrame=10;
-
 
     for(;;)
     {
@@ -54,12 +59,11 @@ int main(int argc, char *argv[])
             imshow("frame2",temp1);
             cv::Mat difference=temp-temp1;
             namedWindow("difference",3);
-            imshow("difference",difference);*/
+            imshow("difference",difference);
             temp=VideoUtil::hidePartsVideo(temp);
 
             namedWindow("frame");
             imshow("frame",temp);
-
         }
         else {
            frame=VideoUtil::hidePartsVideo(frame);
@@ -74,6 +78,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    */
     timerMain.stopTimer();
     timerMain.getTime();
     return 0;

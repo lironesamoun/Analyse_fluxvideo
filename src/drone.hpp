@@ -22,6 +22,7 @@
 
 #include "utilities/ioexception.hpp"
 #include "utilities/videoUtil.hpp"
+#include "core/features/stabilizationOpenCv.hpp"
 
 
 
