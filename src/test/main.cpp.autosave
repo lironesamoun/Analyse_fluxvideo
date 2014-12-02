@@ -70,15 +70,6 @@ int main(int argc, char *argv[])
 
             }
 
-            /*namedWindow("frame");
-            imshow("frame",temp);
-            namedWindow("frame2");
-            imshow("frame2",temp1);
-            cv::Mat difference=temp-temp1;
-            namedWindow("difference",3);
-            imshow("difference",difference);
-            temp=VideoUtil::hidePartsVideo(temp);*/
-
             namedWindow("frame");
             imshow("frame",temp);
         }

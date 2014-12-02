@@ -23,6 +23,8 @@
 #include "utilities/ioexception.hpp"
 #include "utilities/videoUtil.hpp"
 #include "core/features/stabilizationOpenCv.hpp"
+#include "core/features/stabilizationSimple.hpp"
+#include "core/features/stabilizationLive.hpp"
 
 
 

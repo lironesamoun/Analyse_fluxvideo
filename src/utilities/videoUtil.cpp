@@ -24,7 +24,19 @@ cv::Mat VideoUtil::hidePartsVideo(cv::Mat& frame){
      return frame;
 }
 
-
+/**
+  Geometrical crop of a frame from a video
+  Delete above and below part of a video
+  **/
+cv::Mat VideoUtil::geometricalCrop(cv::Mat& frame,int lh,int lw){
+    cv::Mat roi;//Final region
+    int height=frame.rows;
+    int width=frame.cols;
+    int heightLimit=height-lh;
+    int WidthLimit=width-lw;
+    roi=frame(Range(lh,heightLimit),Range(lw,WidthLimit));//(haut en bas)(gauche à droite)
+    return roi;
+}
 
 /**
   Only read the video

@@ -1,5 +1,5 @@
-#ifndef DRONE_STABILIZATION_HPP
-#define DRONE_STABILIZATION_HPP
+#ifndef DRONE_STABILIZATIONCV_HPP
+#define DRONE_STABILIZATIONCV_HPP
 
 #include "drone.hpp"
 #include "opencv2/videostab/stabilizer.hpp"
@@ -38,4 +38,4 @@ public:
 }//drone
 
 
-#endif //DRONE_STABILIZATION_HPP
+#endif //DRONE_STABILIZATIONCV_HPP
