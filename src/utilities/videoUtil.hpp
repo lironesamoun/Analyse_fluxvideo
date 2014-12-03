@@ -20,6 +20,7 @@ public:
   static cv::Mat hidePartsVideo(cv::Mat& frame);
   static cv::Mat geometricalCrop(cv::Mat& frame,int lh,int lw);
   static int run(std::string& path);
+  static string type2str(int type);
 
 public:
     double getFps() const;

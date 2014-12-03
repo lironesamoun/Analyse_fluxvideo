@@ -25,6 +25,8 @@
 #include "core/features/stabilizationOpenCv.hpp"
 #include "core/features/stabilizationSimple.hpp"
 #include "core/features/stabilizationLive.hpp"
+#include "core/features/stabilizationSimpleTest.hpp"
+#include "core/features/stabilizationSimpleTest2.hpp"
 
 
 

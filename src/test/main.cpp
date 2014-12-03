@@ -23,19 +23,32 @@ int main(int argc, char *argv[])
     int counter = 0;
     double sec;
     double fps;
+    bool stepFrame=false;
     // fps counter end
 
     Timer timerMain;
     timerMain.startTimer();
     string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/test.avi";
-    string path1="/home/sl001093/Documents/MAM5/PFE/videos/video.avi";
+    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
     StabilizationOpenCv stabopenCv(path1,outputPath);
     //stabopenCv.init();
     StabilizationSimple stabSimple(path1);
-   // stabSimple.init();
+    // stabSimple.init();
     StabilizationLive stabLive(path1);
-  //  stabLive.init();
+    //  stabLive.init();
+    StabilizationTestSimple stabTest(path1);
+  //   stabTest.init();
+    StabilizationTestSimple2 stabTest2(path1);
+    stabTest2.init();
 
+
+
+}
+
+
+
+
+    /*
     bool skipFrame=false;
 
 
@@ -69,15 +82,6 @@ int main(int argc, char *argv[])
                 temp1 = frame.clone();
 
             }
-
-            /*namedWindow("frame");
-            imshow("frame",temp);
-            namedWindow("frame2");
-            imshow("frame2",temp1);
-            cv::Mat difference=temp-temp1;
-            namedWindow("difference",3);
-            imshow("difference",difference);
-            temp=VideoUtil::hidePartsVideo(temp);*/
 
             namedWindow("frame");
             imshow("frame",temp);
@@ -114,5 +118,5 @@ int main(int argc, char *argv[])
     return 0;
 
 
-}
+}*/
 
