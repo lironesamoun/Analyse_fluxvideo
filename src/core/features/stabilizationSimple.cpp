@@ -18,9 +18,6 @@ namespace drone
 
 StabilizationSimple::StabilizationSimple(string &path){
     this->path=path;
-    // For further analysis
-
-
 }
 
 
@@ -52,8 +49,9 @@ struct Trajectory
     double a; // angle
 };
 
-void StabilizationSimple::init(){
+void StabilizationSimple::run(string &path){
 
+    this->path=path;
     // For further analysis
     ofstream out_transform("prev_to_cur_transformation.txt");
     ofstream out_trajectory("trajectory.txt");

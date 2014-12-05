@@ -3,6 +3,7 @@
 
 #include "drone.hpp"
 #include "opencv2/videostab/stabilizer.hpp"
+#include "core/features/IStabilization.hpp"
 
 using namespace cv;
 using namespace std;
@@ -21,9 +22,9 @@ namespace drone
 class StabilizationSimple
 {
 public:
-    StabilizationSimple(string &path);
+    StabilizationSimple(string& path);
 
-    void init();
+    void run(string& path);
 
 public:
    static  const int SMOOTHING_RADIUS = 30; // In frames. The larger the more stable the video, but less reactive to sudden panning
@@ -32,6 +33,7 @@ public:
 
 public:
     string path;
+
 
 
 };

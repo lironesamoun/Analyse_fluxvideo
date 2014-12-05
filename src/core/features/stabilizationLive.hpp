@@ -16,6 +16,8 @@ class StabilizationLive
 {
 public:
     StabilizationLive(string &path);
+    void init_kalman(double x, double y);
+    Point2f kalman_predict_correct(double x, double y);
 
     void init();
 

@@ -15,12 +15,16 @@ class StabilizationTestSimple2
 {
 public:
     StabilizationTestSimple2(string &path);
+    cv::Mat computeMask(cv::Mat& frame, int lh, int lw);
+    void init_kalman(double x, double y);
+    Point2f kalman_predict_correct(double x, double y);
 
     void init();
 
 
 public:
     string path;
+
 
 
 };

@@ -21,180 +21,321 @@ using namespace cv::videostab;
 
 namespace drone
 {
+//Declare Kalman Filter
+ KalmanFilter KF (4,2,0);
+ Mat_<float> state (4,1);
+ Mat_<float> measurement (2,1);
 
 StabilizationTestSimple2::StabilizationTestSimple2(string &path){
     this->path=path;
+
     // For further analysis
 
 
 }
 
+cv::Mat StabilizationTestSimple2::computeMask(Mat& frame,int lh,int lw){
+    int height=frame.rows;
+    int width=frame.cols;
+
+    /// Creation du masque pour le calcul de point d'interet
+    int limitH=lh;
+    int limitW=lw;
+    cv::Mat mask = cv::Mat::zeros(frame.size(), CV_8UC1);  //NOTE: using the type explicitly    //Bas en haut puis gaudre à droite
+    cv::Mat roi1=frame(Range(50,limitH),Range(50,limitW));//Coin haut à gauche
+    cv::Mat roi2=frame(Range(height-limitH,height-50),Range(50,limitW));//Coinbas à gauche
+    cv::Mat roi3=frame(Range(50,limitH),Range(width-limitW,width-50));//Coin haut à droite
+    cv::Mat roi4=frame(Range(height-limitH,height-50),Range(width-limitW,width-50));//Coin bas à droite
+
+    roi1.copyTo(mask(Range(50,limitH),Range(50,limitW)));
+    roi2.copyTo(mask(Range(height-limitH,height-50),Range(50,limitW)));
+    roi3.copyTo(mask(Range(50,limitH),Range(width-limitW,width-50)));
+    roi4.copyTo(mask(Range(height-limitH,height-50),Range(width-limitW,width-50)));
+
+
+
+    return mask;
+
+}
+
+void StabilizationTestSimple2::init_kalman(double x, double y)
+{
+
+     KF.statePre.at<float>(0) = x;
+     KF.statePre.at<float>(1) = y;
+     KF.statePre.at<float>(2) = 0;
+     KF.statePre.at<float>(3) = 0;
+
+     KF.transitionMatrix = *(Mat_<float>(4,4) << 1,0,1,0,    0,1,0,1,     0,0,1,0,   0,0,0,1);
+     KF.processNoiseCov = *(Mat_<float>(4,4) << 0.2,0,0.2,0,  0,0.2,0,0.2,  0,0,0.3,0,
+                                                                                  0,0,0,0.3);
+     setIdentity(KF.measurementMatrix);
+     setIdentity(KF.processNoiseCov,Scalar::all(1e-4));
+     setIdentity(KF.measurementNoiseCov,Scalar::all(1e-1));
+     setIdentity(KF.errorCovPost, Scalar::all(.1));
+      measurement.setTo(Scalar(0));
+}
+
+Point2f StabilizationTestSimple2::kalman_predict_correct(double x, double y)
+{
+     Mat prediction = KF.predict();
+     Point2f predictPt (prediction.at<float>(0), prediction.at<float>(1));
+     std::cout << "predicted x,y: (" << predictPt.x << "," << predictPt.y << ")" << endl;
+     measurement(0) = x;
+     measurement(1) = y;
+     Mat estimated = KF.correct(measurement);
+     Point2f statePt (estimated.at<float>(0), estimated.at<float>(1));
+     return statePt;
+}
+
 void StabilizationTestSimple2::init(){
-    time_t start, end;
-    int counter = 0;
-    double sec;
-    double fps;
-    int compteur=0;
+
+    Timer timerFPS;
+    timerFPS.startTimerFPS();
+
+    //Number of interest points to detect
+    int nb_max=50;
+
+    // Accumulated frame to frame transform
+    double a = 0;
+    double x = 0;
+    double y = 0;
+
+    // Different matrix
+    Mat prevFrame, colorImg, outImg, grayImg,last_transformationmatrix;
+
     //Read the video
     VideoCapture cap(path);
-    Mat currImg, colorImg, outImg, grayImg;
+    double fps_original = cap.get(CV_CAP_PROP_FPS);
+    std::cout << "fps of video original: " << fps_original << std::endl;
 
 
     cap.read(colorImg);
-    VideoUtil::geometricalCrop(colorImg,70,0);//Crop the picture
+    VideoUtil::geometricalCrop(colorImg,80,0);//Crop the picture
     cvtColor(colorImg,grayImg,CV_BGR2GRAY);
-    currImg = grayImg.clone();// Current picture
+    prevFrame = grayImg.clone();// Current picture
+
+    // Get mask in order to compute features
+    cv::Mat mask=computeMask(prevFrame,230,400);
+
+    Mat currFrame=prevFrame;
 
 
+    int compteur=0;
 
-    Mat refFrame;
-    cap.read(refFrame);//Frame +1
-    VideoUtil::geometricalCrop(refFrame,70,0);
-    cvtColor(refFrame,refFrame,CV_BGR2GRAY); // Frame +1
-
-
-    namedWindow("Stabilize");
-    namedWindow("GoodMatches");
-    Mat temp;
-    Mat currentFrame=refFrame;
 
 
     for (;;){
-    Mat matrixTransform=Mat::eye(Size(3,3),CV_64FC1);
-        // fps counter begin
-        if (counter == 0){
-            time(&start);
-        }
+
         int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
-        //  cap.read(colorImg);
 
-        VideoUtil::geometricalCrop(colorImg,70,0);// Crop the video
-        Debug::trace("Current frame: " + to_string(nbreCurrentFrame));
-        currentFrame.copyTo(refFrame);//Get the reference frame
-
-
+        currFrame.copyTo(prevFrame);//Get the reference (previous) frame
         cap.read(colorImg);
-        VideoUtil::geometricalCrop(colorImg,70,0);
+        cv::Mat originalFrame=colorImg.clone();
+        VideoUtil::geometricalCrop(colorImg,80,0);
         cvtColor(colorImg,grayImg,CV_BGR2GRAY);
-        currentFrame =  grayImg.clone();//Get the current frame
+        currFrame=  grayImg.clone();//Get the current frame to compare with the previous frame
 
 
+        cv::Mat mask=computeMask(prevFrame,230,400);
+        namedWindow("Mask");
+        imshow("Mask",mask);
 
+        /// Calcul de points d'interet
+        vector<Point2f> cornersPrev,cornersPrev2;//Stock features of reference Frame
+        cornersPrev.reserve(nb_max);
 
-        vector<Point2f> cornersPrevious;//Stock features of reference Frame
-        cornersPrevious.reserve(400);
-
-        vector<Point2f> cornersCurr;//Stock features of current frame
-        cornersCurr.reserve(400);
+        vector<Point2f> cornersCurr,cornersCurr2;
+        cornersCurr.reserve(nb_max);
+        cv::goodFeaturesToTrack(prevFrame,cornersPrev,nb_max,0.01,5.0,prevFrame);
 
         TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
 
-        goodFeaturesToTrack(refFrame,cornersPrevious,400,0.01,5.0);
 
-        cornerSubPix(refFrame,cornersPrevious,Size(20,20),Size(-1,-1),opticalFlowTermCriteria);
-        // Debug::trace("Size of feature track : " + to_string(cornersPrevious.size()));
+        cornerSubPix(prevFrame,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
 
 
-        vector<uchar> featureFound; // status of tracked features
-        featureFound.reserve(400);
-
-        vector<float> featureErrors; // error in tracking
-        featureErrors.reserve(400);
-
-
+        vector<uchar> features_found;
+        vector<float> features_error;
+        // calcOpticalFlowPyrLK(prevFrame,currFrame,cornersPrev,cornersCurr,features_found,features_error,Size(10∗4+1,10∗4+1),5,opticalFlowTermCriteria);
+        calcOpticalFlowPyrLK(prevFrame,currFrame,cornersPrev,cornersCurr,features_found,features_error,Size(20,20),3,
+                             opticalFlowTermCriteria);
 
 
-        calcOpticalFlowPyrLK(refFrame,currentFrame,cornersPrevious,cornersCurr,featureFound,featureErrors,Size(20,20),3,
-                             cvTermCriteria(CV_TERMCRIT_ITER|CV_TERMCRIT_EPS,20,0.3),0,0.0001);
-
-
-
-
+        // weed out bad matches
+        for(size_t i=0; i < features_found.size(); i++) {
+            if(features_found[i]) {
+                cornersPrev2.push_back(cornersPrev[i]);
+                cornersCurr2.push_back(cornersCurr[i]);
+            }
+        }
+        /*
         // keep the good points
         std::vector<cv::Point2f> initialPoints;
         std::vector<cv::Point2f> trackedPoints;
         for (int i=0;i<cornersCurr.size();i++){
-            double motion = sqrt(pow(cornersPrevious.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrevious.at(i).y-cornersCurr.at(i).y,2));
+            double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
             // std::cout << "Motion: " << motion << std::endl;
-            if (featureFound[i] && motion < 20 ){
+            if (features_found[i] && motion < 20 ){
                 //Keep this point in vector
-                initialPoints.push_back(cornersPrevious.at(i));
+                initialPoints.push_back(cornersPrev.at(i));
                 trackedPoints.push_back(cornersCurr.at(i));
             }
         }
-
-        Debug::info("Nbre de features avant: " + to_string(cornersPrevious.size()));
-        Debug::info("Nbre de features après: " + to_string(trackedPoints.size()));
-        // draw the tracking effect
+*/
+        /// Draw features
+        Debug::info("Size features found: " + to_string(features_found.size()));
         cv::Mat drawingPoint;
-        currentFrame.copyTo(drawingPoint);
-
+        currFrame.copyTo(drawingPoint);
         cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
-        // for all tracked points
-        for(uint i= 0; i < initialPoints.size(); i++ ) {
-            // draw line and circle
-            cv::line(drawingPoint,
-                     initialPoints[i], // initial position
-                     trackedPoints[i], // new position
-                     cv::Scalar(255,255,255));
-            cv::circle(drawingPoint, trackedPoints[i], 3, cv::Scalar(0,0,255),-1);
+        for( int i = 0; i < (int)cornersPrev2.size(); i++ )
+        {
+
+                line (drawingPoint, cornersPrev2.at(i),
+                      cornersCurr2.at(i),cv::Scalar(0,0,255));
+            cv::circle(drawingPoint,cornersCurr2.at(i), 3, cv::Scalar(0,0,255),-1);
         }
 
-        namedWindow("Tracking point");
-        imshow("Tracking point",drawingPoint);
-        //Compute the homography
-        if (initialPoints.size() >4 && trackedPoints.size()>4){
 
-             cv::Mat transformMatrix = findHomography(initialPoints,trackedPoints,CV_RANSAC,3);
+        namedWindow("drawingPoint");
+        imshow("drawingPoint",drawingPoint);
+        /// Transformation
+        Mat transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
 
-         //   Mat transformMatrix = estimateGlobalMotionRobust(initialPoints,trackedPoints,3,RansacParams::affine2dMotionStd(),0,0);
+        // in rare cases no transform is found. We'll just use the last known good transform.
+        if(transformMatrix.data == NULL) {
+            last_transformationmatrix.copyTo(transformMatrix);
+        }
 
-            // Mat transformMatrix = estimateGlobalMotionLeastSquares(initialPoints,trackedPoints,AFFINE,0);
-            //Mat transformMatrix = estimateRigidTransform(initialPoints,trackedPoints ,false); // false = rigid transform, no scaling/shearing
-            // warpAffine(refFrame,outImg,transformMatrix,refFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
+        transformMatrix.copyTo(last_transformationmatrix);
 
-            std::cout << "type: " << VideoUtil::type2str(transformMatrix.type()) << std::endl;
+        // decompose T
+        double dx = transformMatrix.at<double>(0,2);
+        double dy = transformMatrix.at<double>(1,2);
+        double da = atan2(transformMatrix.at<double>(1,0), transformMatrix.at<double>(0,0));
 
-            matrixTransform=matrixTransform.mul(transformMatrix);
+        // Accumulated frame to frame transform
+        x += dx;
+        y += dy;
+        a += da;
+        std::cout << "accumulated x,y: (" << x << "," << y << ")" << endl;
 
-            warpPerspective(currentFrame,outImg,matrixTransform,refFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
-            namedWindow("Stabilized");
-
+        if (compteur==0){
+            init_kalman(x,y);
         }
         else {
-            Mat transformMatrix = estimateGlobalMotionRobust(cornersPrevious,cornersCurr,3,RansacParams::affine2dMotionStd(),0,0);
 
 
-            warpPerspective(currentFrame,outImg,transformMatrix,refFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
+              vector<Point2f> smooth_feature_point;
+              Point2f smooth_feature=kalman_predict_correct(x,y);
+              smooth_feature_point.push_back(smooth_feature);
+              std::cout << "smooth x,y: (" << smooth_feature.x << "," << smooth_feature.y << ")" << endl;
+
+              // target - current
+              double diff_x = smooth_feature.x - x;//
+              double diff_y = smooth_feature.y - y;
+
+              dx = dx + diff_x;
+              dy = dy + diff_y;
+
+              transformMatrix.at<double>(0,0) = cos(da);
+              transformMatrix.at<double>(0,1) = -sin(da);
+              transformMatrix.at<double>(1,0) = sin(da);
+              transformMatrix.at<double>(1,1) = cos(da);
+              transformMatrix.at<double>(0,2) = dx;
+              transformMatrix.at<double>(1,2) = dy;
+
+              warpAffine(prevFrame,outImg,transformMatrix,prevFrame.size());
+
+              namedWindow("stabilized");
+              imshow("stabilized",outImg);
+              namedWindow("Original");
+              imshow("Original",mask);
+              //waitKey(0);
+
+
         }
+         compteur++;
 
 
-        namedWindow("Stabilized");
-        imshow("Stabilized",outImg);
 
 
-        // fps counter begin
-        std::cout << "okey"<< std::endl;
-        time(&end);
-        counter++;
-        sec = difftime(end, start);
-        fps = counter/sec;
-        // if (counter > 30)
-        std::cout << "Fps: " << fps << std::endl;
 
-        // overflow protection
-        if (counter == (INT_MAX - 1000))
-            counter = 0;
-        // fps counter end
 
-        compteur++;
+        //std::cout << "type: " << VideoUtil::type2str(transformMatrix.type()) << std::endl;
+        //warpAffine(currFrame,outImg,transformMatrix,currFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
+      //  Mat transformMatrix = estimateGlobalMotionRobust(cornersPrev,cornersCurr,3,RansacParams::affine2dMotionStd(),0,0);
+
+
+       // warpPerspective(currFrame,outImg,transformMatrix,currFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
+
+       // namedWindow("Features before");
+        //imshow("Features before",drawingPoint);
+
+
+        /// Smoothing motion
+        // First predict, to update the internal statePre variable
+
+        //For each frame, we have to predict all the keypoints
+        //Initialization
+       /* for (int i=0;i<cornersCurr.size();i++){
+               init_kalman(cornersCurr.at(i).x,cornersCurr.at(i).y);
+        }
+        for (int i=0;i<cornersCurr.size();i++){
+            Point2f smooth_feature=kalman_predict_correct(cornersCurr.at(i).x,cornersCurr.at(i).y);
+            smooth_feature.x=(int)smooth_feature.x;
+            smooth_feature.y=(int)smooth_feature.y;
+            smooth_feature_point.push_back(smooth_feature);
+            std::cout << "smooth x,y: (" << smooth_feature.x << "," << smooth_feature.y << ")" << endl;
+        }
+*/
+         //Mat transformMatrix = estimateRigidTransform(cornersPrev,smooth_feature_point ,false);
+
+       //   Mat transformMatrix = estimateGlobalMotionRobust(cornersPrev,smooth_feature_point,3,RansacParams::affine2dMotionStd(),0,0);
+
+       //    std::cout << "type: " << VideoUtil::type2str(transformMatrix.type()) << std::endl;
+
+       // warpAffine(currFrame,outImg,transformMatrix,currFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
+
+         //  warpPerspective(currFrame,outImg,transformMatrix,currFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
+
+
+
+
+        /*// Now draw the original and stablised side by side for coolness
+        Mat canvas = Mat::zeros(currFrame.rows, currFrame.cols*2+10, currFrame.type());
+
+        originalFrame.copyTo(canvas(Range::all(), Range(0, outImg.cols)));
+        outImg.copyTo(canvas(Range::all(), Range(outImg.cols+10, outImg.cols*2+10)));
+
+        // If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
+        if(canvas.cols > 1920) {
+            resize(canvas, canvas, Size(canvas.cols/2, canvas.rows/2));
+        }
+        //outputVideo<<canvas;
+        imshow("before and after", canvas);*/
+
+
+        //  cap.read(colorImg);
+
+
+
+
+
+
+        namedWindow("Original");
+        imshow("Original",originalFrame);
+
+        timerFPS.stopTimerFPS();
+        timerFPS.getFPS();
+
+
         if(waitKey(27) >= 0) break;
 
     }
 }
 
 }
-
 
 
 
