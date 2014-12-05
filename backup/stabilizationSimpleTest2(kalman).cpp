@@ -41,18 +41,16 @@ cv::Mat StabilizationTestSimple2::computeMask(Mat& frame,int lh,int lw){
     /// Creation du masque pour le calcul de point d'interet
     int limitH=lh;
     int limitW=lw;
-    cv::Mat mask = cv::Mat::zeros(frame.size(), CV_8UC1);  //NOTE: using the type explicitly    //Bas en haut puis gaudre à droite
-    cv::Mat roi1=frame(Range(50,limitH),Range(50,limitW));//Coin haut à gauche
-    cv::Mat roi2=frame(Range(height-limitH,height-50),Range(50,limitW));//Coinbas à gauche
-    cv::Mat roi3=frame(Range(50,limitH),Range(width-limitW,width-50));//Coin haut à droite
-    cv::Mat roi4=frame(Range(height-limitH,height-50),Range(width-limitW,width-50));//Coin bas à droite
+    cv::Mat mask = cv::Mat::zeros(frame.size(), CV_8UC1);  //NOTE: using the type explicitly
+    cv::Mat roi1=frame(Range(0,limitH),Range(0,limitW));//Coin haut à gauche
+    cv::Mat roi2=frame(Range(height-limitH,height),Range(0,limitW));//Coinbas à gauche
+    cv::Mat roi3=frame(Range(0,limitH),Range(width-limitW,width));//Coin haut à droite
+    cv::Mat roi4=frame(Range(height-limitH,height),Range(width-limitW,width));//Coin haut à droite
 
-    roi1.copyTo(mask(Range(50,limitH),Range(50,limitW)));
-    roi2.copyTo(mask(Range(height-limitH,height-50),Range(50,limitW)));
-    roi3.copyTo(mask(Range(50,limitH),Range(width-limitW,width-50)));
-    roi4.copyTo(mask(Range(height-limitH,height-50),Range(width-limitW,width-50)));
-
-
+    roi1.copyTo(mask(Range(0,limitH),Range(0,limitW)));
+    roi2.copyTo(mask(Range(height-limitH,height),Range(0,limitW)));
+    roi3.copyTo(mask(Range(0,limitH),Range(width-limitW,width)));
+    roi4.copyTo(mask(Range(height-limitH,height),Range(width-limitW,width)));
 
     return mask;
 
@@ -70,10 +68,9 @@ void StabilizationTestSimple2::init_kalman(double x, double y)
      KF.processNoiseCov = *(Mat_<float>(4,4) << 0.2,0,0.2,0,  0,0.2,0,0.2,  0,0,0.3,0,
                                                                                   0,0,0,0.3);
      setIdentity(KF.measurementMatrix);
-     setIdentity(KF.processNoiseCov,Scalar::all(1e-4));
+     setIdentity(KF.processNoiseCov,Scalar::all(1e-6));
      setIdentity(KF.measurementNoiseCov,Scalar::all(1e-1));
      setIdentity(KF.errorCovPost, Scalar::all(.1));
-      measurement.setTo(Scalar(0));
 }
 
 Point2f StabilizationTestSimple2::kalman_predict_correct(double x, double y)
@@ -89,20 +86,17 @@ Point2f StabilizationTestSimple2::kalman_predict_correct(double x, double y)
 }
 
 void StabilizationTestSimple2::init(){
+    time_t start, end;
+    double fps;
+    int counter = 0;
+    double sec;
+    time(&start);
 
-    Timer timerFPS;
-    timerFPS.startTimerFPS();
-
-    //Number of interest points to detect
-    int nb_max=30;
 
     // Accumulated frame to frame transform
     double a = 0;
     double x = 0;
     double y = 0;
-
-    // Different matrix
-    Mat prevFrame, colorImg, outImg, grayImg,last_transformationmatrix;
 
     //Read the video
     VideoCapture cap(path);
@@ -110,19 +104,21 @@ void StabilizationTestSimple2::init(){
     std::cout << "fps of video original: " << fps_original << std::endl;
 
 
+    Mat prevFrame, colorImg, outImg, grayImg;
+
+
     cap.read(colorImg);
-    VideoUtil::geometricalCrop(colorImg,80,0);//Crop the picture
+    VideoUtil::geometricalCrop(colorImg,70,0);//Crop the picture
     cvtColor(colorImg,grayImg,CV_BGR2GRAY);
     prevFrame = grayImg.clone();// Current picture
 
-    // Get mask in order to compute features
-    cv::Mat mask=computeMask(prevFrame,230,400);
+    /// Get mask in order to compute features
+    cv::Mat mask=computeMask(prevFrame,230,300);
 
     Mat currFrame=prevFrame;
-
-
+    measurement.setTo(Scalar(0));
+    Mat last_transformationmatrix;
     int compteur=0;
-
     for (;;){
 
         int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
@@ -130,17 +126,15 @@ void StabilizationTestSimple2::init(){
         currFrame.copyTo(prevFrame);//Get the reference (previous) frame
         cap.read(colorImg);
         cv::Mat originalFrame=colorImg.clone();
-        VideoUtil::geometricalCrop(colorImg,80,0);
+        VideoUtil::geometricalCrop(colorImg,70,0);
         cvtColor(colorImg,grayImg,CV_BGR2GRAY);
         currFrame=  grayImg.clone();//Get the current frame to compare with the previous frame
 
 
-        cv::Mat mask=computeMask(prevFrame,230,400);
-        namedWindow("Mask");
-        imshow("Mask",mask);
+
 
         /// Calcul de points d'interet
-
+        int nb_max=20;
         vector<Point2f> cornersPrev,cornersPrev2;//Stock features of reference Frame
         cornersPrev.reserve(nb_max);
 
@@ -149,8 +143,8 @@ void StabilizationTestSimple2::init(){
 
         TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
 
-        cv::goodFeaturesToTrack(prevFrame,cornersPrev,nb_max,0.01,5.0,prevFrame);
-        cornerSubPix(prevFrame,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
+        cv::goodFeaturesToTrack(currFrame,cornersPrev,nb_max,0.01,5.0,mask);
+        cornerSubPix(currFrame,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
 
         vector<uchar> features_found;
         vector<float> features_error;
@@ -194,8 +188,6 @@ void StabilizationTestSimple2::init(){
         }
 
 
-        namedWindow("drawingPoint");
-        imshow("drawingPoint",drawingPoint);
         /// Transformation
         Mat transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
 
@@ -222,7 +214,7 @@ void StabilizationTestSimple2::init(){
         }
         else {
 
-
+                init_kalman(x,y);
               vector<Point2f> smooth_feature_point;
               Point2f smooth_feature=kalman_predict_correct(x,y);
               smooth_feature_point.push_back(smooth_feature);
@@ -242,13 +234,12 @@ void StabilizationTestSimple2::init(){
               transformMatrix.at<double>(0,2) = dx;
               transformMatrix.at<double>(1,2) = dy;
 
-              warpAffine(prevFrame,outImg,transformMatrix,prevFrame.size());
+              warpAffine(currFrame,outImg,transformMatrix,prevFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
 
               namedWindow("stabilized");
               imshow("stabilized",outImg);
               namedWindow("Original");
-              imshow("Original",mask);
-              //waitKey(0);
+              imshow("Original",originalFrame);
 
 
         }
@@ -316,15 +307,16 @@ void StabilizationTestSimple2::init(){
         //  cap.read(colorImg);
 
 
-
-
+        time(&end);
+        ++counter;
+        sec = difftime (end, start);
+        fps = counter / sec;
+        std::cout << "current fps: " << fps << std::endl;
 
 
         namedWindow("Original");
         imshow("Original",originalFrame);
 
-        timerFPS.stopTimerFPS();
-        timerFPS.getFPS();
 
 
         if(waitKey(27) >= 0) break;
@@ -333,6 +325,7 @@ void StabilizationTestSimple2::init(){
 }
 
 }
+
 
 
 

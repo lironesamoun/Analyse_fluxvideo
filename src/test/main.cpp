@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
     Timer timerMain;
     timerMain.startTimer();
     string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/test.avi";
-    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
+    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau5.avi";
     StabilizationOpenCv stabopenCv(path1,outputPath);
     //stabopenCv.init();
     StabilizationSimple stabSimple(path1);
     // stabSimple.init();
     StabilizationLive stabLive(path1);
-    //  stabLive.init();
+      //stabLive.init();
     StabilizationTestSimple stabTest(path1);
-  //   stabTest.init();
+   //  stabTest.init();
     StabilizationTestSimple2 stabTest2(path1);
     stabTest2.init();
 
@@ -119,4 +119,3 @@ int main(int argc, char *argv[])
 
 
 }*/
-

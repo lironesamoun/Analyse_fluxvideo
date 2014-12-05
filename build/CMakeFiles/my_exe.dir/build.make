@@ -164,9 +164,32 @@ CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides: CMak
 
 CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o
 
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationLive.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationLive.cpp
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/stabilizationLive.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.i
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/stabilizationLive.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.s
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o
+
 CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o: CMakeFiles/my_exe.dir/flags.make
 CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp
 
@@ -187,9 +210,78 @@ CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides: CMak
 
 CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
 
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.cpp
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.i
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.s
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o: /home/user/Documents/pfe_code/src/core/features/IStabilization.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o -c /home/user/Documents/pfe_code/src/core/features/IStabilization.cpp
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/IStabilization.cpp > CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.i
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/IStabilization.cpp -o CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.s
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o: CMakeFiles/my_exe.dir/flags.make
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o: /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o -c /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.cpp
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.cpp > CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.i
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.cpp -o CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.s
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.requires:
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.requires
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.provides: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.requires
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.provides.build
+.PHONY : CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.provides
+
+CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.provides.build: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o
+
 CMakeFiles/my_exe.dir/src/core/image.cpp.o: CMakeFiles/my_exe.dir/flags.make
 CMakeFiles/my_exe.dir/src/core/image.cpp.o: /home/user/Documents/pfe_code/src/core/image.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/samoun/Dropbox/MAM5/PFE/Analyse_video_drone/code/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/my_exe.dir/src/core/image.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/my_exe.dir/src/core/image.cpp.o -c /home/user/Documents/pfe_code/src/core/image.cpp
 
@@ -217,7 +309,11 @@ my_exe_OBJECTS = \
 "CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o" \
 "CMakeFiles/my_exe.dir/src/test/main.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o" \
+"CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o" \
 "CMakeFiles/my_exe.dir/src/core/image.cpp.o"
 
 # External object files for target my_exe
@@ -228,7 +324,11 @@ my_exe_EXTERNAL_OBJECTS =
 /home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o
 /home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/test/main.cpp.o
 /home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o
 /home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o
+/home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o
 /home/user/Documents/pfe_code/bin/my_exe: CMakeFiles/my_exe.dir/src/core/image.cpp.o
 /home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_videostab.so.2.4.9
 /home/user/Documents/pfe_code/bin/my_exe: /usr/local/lib/libopencv_video.so.2.4.9
@@ -277,7 +377,11 @@ CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/Debug/timer.cpp.o.requ
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/utilities/videoUtil.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/test/main.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o.requires
+CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o.requires
 CMakeFiles/my_exe.dir/requires: CMakeFiles/my_exe.dir/src/core/image.cpp.o.requires
 .PHONY : CMakeFiles/my_exe.dir/requires
 

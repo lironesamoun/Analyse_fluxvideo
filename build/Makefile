@@ -159,6 +159,54 @@ src/Debug/timer.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/Debug/timer.cpp.s
 .PHONY : src/Debug/timer.cpp.s
 
+src/core/features/IStabilization.o: src/core/features/IStabilization.cpp.o
+.PHONY : src/core/features/IStabilization.o
+
+# target to build an object file
+src/core/features/IStabilization.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.o
+.PHONY : src/core/features/IStabilization.cpp.o
+
+src/core/features/IStabilization.i: src/core/features/IStabilization.cpp.i
+.PHONY : src/core/features/IStabilization.i
+
+# target to preprocess a source file
+src/core/features/IStabilization.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.i
+.PHONY : src/core/features/IStabilization.cpp.i
+
+src/core/features/IStabilization.s: src/core/features/IStabilization.cpp.s
+.PHONY : src/core/features/IStabilization.s
+
+# target to generate assembly for a file
+src/core/features/IStabilization.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.s
+.PHONY : src/core/features/IStabilization.cpp.s
+
+src/core/features/stabilizationLive.o: src/core/features/stabilizationLive.cpp.o
+.PHONY : src/core/features/stabilizationLive.o
+
+# target to build an object file
+src/core/features/stabilizationLive.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o
+.PHONY : src/core/features/stabilizationLive.cpp.o
+
+src/core/features/stabilizationLive.i: src/core/features/stabilizationLive.cpp.i
+.PHONY : src/core/features/stabilizationLive.i
+
+# target to preprocess a source file
+src/core/features/stabilizationLive.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.i
+.PHONY : src/core/features/stabilizationLive.cpp.i
+
+src/core/features/stabilizationLive.s: src/core/features/stabilizationLive.cpp.s
+.PHONY : src/core/features/stabilizationLive.s
+
+# target to generate assembly for a file
+src/core/features/stabilizationLive.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.s
+.PHONY : src/core/features/stabilizationLive.cpp.s
+
 src/core/features/stabilizationOpenCv.o: src/core/features/stabilizationOpenCv.cpp.o
 .PHONY : src/core/features/stabilizationOpenCv.o
 
@@ -206,6 +254,54 @@ src/core/features/stabilizationSimple.s: src/core/features/stabilizationSimple.c
 src/core/features/stabilizationSimple.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s
 .PHONY : src/core/features/stabilizationSimple.cpp.s
+
+src/core/features/stabilizationSimpleTest.o: src/core/features/stabilizationSimpleTest.cpp.o
+.PHONY : src/core/features/stabilizationSimpleTest.o
+
+# target to build an object file
+src/core/features/stabilizationSimpleTest.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o
+.PHONY : src/core/features/stabilizationSimpleTest.cpp.o
+
+src/core/features/stabilizationSimpleTest.i: src/core/features/stabilizationSimpleTest.cpp.i
+.PHONY : src/core/features/stabilizationSimpleTest.i
+
+# target to preprocess a source file
+src/core/features/stabilizationSimpleTest.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.i
+.PHONY : src/core/features/stabilizationSimpleTest.cpp.i
+
+src/core/features/stabilizationSimpleTest.s: src/core/features/stabilizationSimpleTest.cpp.s
+.PHONY : src/core/features/stabilizationSimpleTest.s
+
+# target to generate assembly for a file
+src/core/features/stabilizationSimpleTest.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.s
+.PHONY : src/core/features/stabilizationSimpleTest.cpp.s
+
+src/core/features/stabilizationSimpleTest2.o: src/core/features/stabilizationSimpleTest2.cpp.o
+.PHONY : src/core/features/stabilizationSimpleTest2.o
+
+# target to build an object file
+src/core/features/stabilizationSimpleTest2.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o
+.PHONY : src/core/features/stabilizationSimpleTest2.cpp.o
+
+src/core/features/stabilizationSimpleTest2.i: src/core/features/stabilizationSimpleTest2.cpp.i
+.PHONY : src/core/features/stabilizationSimpleTest2.i
+
+# target to preprocess a source file
+src/core/features/stabilizationSimpleTest2.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.i
+.PHONY : src/core/features/stabilizationSimpleTest2.cpp.i
+
+src/core/features/stabilizationSimpleTest2.s: src/core/features/stabilizationSimpleTest2.cpp.s
+.PHONY : src/core/features/stabilizationSimpleTest2.s
+
+# target to generate assembly for a file
+src/core/features/stabilizationSimpleTest2.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.s
+.PHONY : src/core/features/stabilizationSimpleTest2.cpp.s
 
 src/core/image.o: src/core/image.cpp.o
 .PHONY : src/core/image.o
@@ -294,12 +390,24 @@ help:
 	@echo "... src/Debug/timer.o"
 	@echo "... src/Debug/timer.i"
 	@echo "... src/Debug/timer.s"
+	@echo "... src/core/features/IStabilization.o"
+	@echo "... src/core/features/IStabilization.i"
+	@echo "... src/core/features/IStabilization.s"
+	@echo "... src/core/features/stabilizationLive.o"
+	@echo "... src/core/features/stabilizationLive.i"
+	@echo "... src/core/features/stabilizationLive.s"
 	@echo "... src/core/features/stabilizationOpenCv.o"
 	@echo "... src/core/features/stabilizationOpenCv.i"
 	@echo "... src/core/features/stabilizationOpenCv.s"
 	@echo "... src/core/features/stabilizationSimple.o"
 	@echo "... src/core/features/stabilizationSimple.i"
 	@echo "... src/core/features/stabilizationSimple.s"
+	@echo "... src/core/features/stabilizationSimpleTest.o"
+	@echo "... src/core/features/stabilizationSimpleTest.i"
+	@echo "... src/core/features/stabilizationSimpleTest.s"
+	@echo "... src/core/features/stabilizationSimpleTest2.o"
+	@echo "... src/core/features/stabilizationSimpleTest2.i"
+	@echo "... src/core/features/stabilizationSimpleTest2.s"
 	@echo "... src/core/image.o"
 	@echo "... src/core/image.i"
 	@echo "... src/core/image.s"
