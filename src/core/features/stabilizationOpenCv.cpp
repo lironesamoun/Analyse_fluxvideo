@@ -29,13 +29,15 @@ StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool st
 
 void StabilizationOpenCv::run()
 {
+    Timer fpsTime;
+     fpsTime.startTimerFPS();
     VideoWriter writer;
     Mat stabilizedFrame;
 
     while (!(stabilizedFrame = stabilizedFrames->nextFrame()).empty())
     {
         if (save_motion)
-            std::cout << "Save motion" << std::endl;
+
             saveMotionsIfNecessary();
         if (!outputPath.empty())
         {
@@ -45,6 +47,8 @@ void StabilizationOpenCv::run()
             writer << stabilizedFrame;
         }
 
+        fpsTime.stopTimerFPS();
+        fpsTime.getFPS();
             imshow("stabilizedFrame", stabilizedFrame);
             char key = static_cast<char>(waitKey(3));
             if (key == 27)
@@ -80,11 +84,14 @@ void StabilizationOpenCv::saveMotionsIfNecessary()
         areMotionsSaved = true;
         cout << "motions are saved";
     }
+
 }
 
 void StabilizationOpenCv::init(){
+
     try
     {
+
 
         StabilizerBase *stabilizer;
         GaussianMotionFilter *motionFilter = 0;
@@ -145,7 +152,9 @@ void StabilizationOpenCv::init(){
     }
     stabilizedFrames.release();
 
+
 }
+
 
 
 }

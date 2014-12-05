@@ -93,8 +93,11 @@ void StabilizationTestSimple2::init(){
     Timer timerFPS;
     timerFPS.startTimerFPS();
 
+    //Crop video
+    bool crop=true;
+
     //Number of interest points to detect
-    int nb_max=30;
+    int nb_max=100;
 
     // Accumulated frame to frame transform
     double a = 0;
@@ -102,89 +105,112 @@ void StabilizationTestSimple2::init(){
     double y = 0;
 
     // Different matrix
-    Mat prevFrame, colorImg, outImg, grayImg,last_transformationmatrix;
+    Mat prevFrameColor,prevFrameGray, currentColorImg,currentGrayImg ,last_transformationmatrix;
+     Mat transformMatrix(2,3,CV_64F);
 
     //Read the video
     VideoCapture cap(path);
     double fps_original = cap.get(CV_CAP_PROP_FPS);
     std::cout << "fps of video original: " << fps_original << std::endl;
 
+    cap >> prevFrameColor;
 
-    cap.read(colorImg);
-    VideoUtil::geometricalCrop(colorImg,80,0);//Crop the picture
-    cvtColor(colorImg,grayImg,CV_BGR2GRAY);
-    prevFrame = grayImg.clone();// Current picture
+    //Crop picture
+    if (crop){
+        VideoUtil::geometricalCrop(prevFrameColor,80,0);
+    }
+    cvtColor(prevFrameColor,currentGrayImg,CV_BGR2GRAY);
+    prevFrameGray = currentGrayImg.clone();// previous gray frame
 
-    // Get mask in order to compute features
-    cv::Mat mask=computeMask(prevFrame,230,400);
+    // Get mask in order to compute features ( 4 little mask in the picture, see the function for more details)
+    cv::Mat mask=computeMask(prevFrameGray,230,400);
 
-    Mat currFrame=prevFrame;
-
+   int border = HORIZONTAL_BORDER_CROP * prevFrameGray.rows / prevFrameGray.cols; // get the aspect ratio correct
 
     int compteur=0;
 
+    // Init stockage
+    vector<Point2f> cornersPrev;//Stock features of previous frame
+    vector<Point2f> cornersPrev2;//Stock features of previous frame after remove bad points
+    cornersPrev.reserve(nb_max);
+
+    vector<Point2f> cornersCurr;//Stock features of current frame
+    vector<Point2f> cornersCurr2;//Stock features of current frame after remove bad points
+    cornersCurr.reserve(nb_max);
+
+    // TermCriteria for optical Flow method
+    TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
+
+    /// Compute good features to track
+    cv::goodFeaturesToTrack(prevFrameGray,cornersPrev,nb_max,0.01,5.0,prevFrameGray);
+
+   /// Improve the accuracy of features
+    cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
+
+    // For all the frame
     for (;;){
 
-        int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
+        //Get the current colour frame
+        cap >> currentColorImg;
 
-        currFrame.copyTo(prevFrame);//Get the reference (previous) frame
-        cap.read(colorImg);
-        cv::Mat originalFrame=colorImg.clone();
-        VideoUtil::geometricalCrop(colorImg,80,0);
-        cvtColor(colorImg,grayImg,CV_BGR2GRAY);
-        currFrame=  grayImg.clone();//Get the current frame to compare with the previous frame
+        if (crop){
+            VideoUtil::geometricalCrop(currentColorImg,80,0);
+        }
+
+       cvtColor(currentColorImg,currentGrayImg,CV_BGR2GRAY);
+       cv::Mat currFrameGray=  currentGrayImg.clone();//Get the current frame to compare with the previous frame
+
+       // cv::Mat mask=computeMask(prevFrameGray,230,400);
 
 
-        cv::Mat mask=computeMask(prevFrame,230,400);
-        namedWindow("Mask");
-        imshow("Mask",mask);
+        vector<uchar> status;//output status vector (of unsigned chars); each element of the vector is set to 1
+                             //if the flow for the corresponding features has been found, otherwise, it is set to 0.
+        vector<float> errors;//output vector of errors; each element of the vector is set to an error for the corresponding feature,
+                             //type of the error measure can be set in flags parameter; if the flow wasn’t found then the error is not defined
+                            //(use the status parameter to find such cases).
 
-        /// Calcul de points d'interet
-
-        vector<Point2f> cornersPrev,cornersPrev2;//Stock features of reference Frame
-        cornersPrev.reserve(nb_max);
-
-        vector<Point2f> cornersCurr,cornersCurr2;
-        cornersCurr.reserve(nb_max);
-
-        TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
-
-        cv::goodFeaturesToTrack(prevFrame,cornersPrev,nb_max,0.01,5.0,prevFrame);
-        cornerSubPix(prevFrame,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
-
-        vector<uchar> features_found;
-        vector<float> features_error;
-        // calcOpticalFlowPyrLK(prevFrame,currFrame,cornersPrev,cornersCurr,features_found,features_error,Size(10∗4+1,10∗4+1),5,opticalFlowTermCriteria);
-        calcOpticalFlowPyrLK(prevFrame,currFrame,cornersPrev,cornersCurr,features_found,features_error,Size(20,20),3,
+        /// Track feature by computing the optical flow
+        calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,cornersPrev,cornersCurr,status,errors,Size(20,20),3,
                              opticalFlowTermCriteria);
 
 
-        // weed out bad matches
-        for(size_t i=0; i < features_found.size(); i++) {
-            if(features_found[i]) {
+        // Remove bad matches
+        for(size_t i=0; i < status.size(); i++) {
+            double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
+            if(status[i] && motion < 20) {
                 cornersPrev2.push_back(cornersPrev[i]);
                 cornersCurr2.push_back(cornersCurr[i]);
             }
         }
-        /*
-        // keep the good points
-        std::vector<cv::Point2f> initialPoints;
-        std::vector<cv::Point2f> trackedPoints;
-        for (int i=0;i<cornersCurr.size();i++){
-            double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
-            // std::cout << "Motion: " << motion << std::endl;
-            if (features_found[i] && motion < 20 ){
-                //Keep this point in vector
-                initialPoints.push_back(cornersPrev.at(i));
-                trackedPoints.push_back(cornersCurr.at(i));
+
+        /// If the number of features decrease, we re-compute features to track them (same step as above)
+        if (cornersPrev2.size()<nb_max-nb_max/3){
+            cornersCurr2.clear();
+            cornersPrev2.clear();
+            cv::goodFeaturesToTrack(prevFrameGray,cornersPrev,nb_max,0.01,5.0,prevFrameGray);
+
+            TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
+
+            cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
+            calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,cornersPrev,cornersCurr,status,errors,Size(20,20),3,
+                                 opticalFlowTermCriteria);
+            for(size_t i=0; i < status.size(); i++) {
+                double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
+                if(status[i] && motion < 20) {
+                    cornersPrev2.push_back(cornersPrev[i]);
+                    cornersCurr2.push_back(cornersCurr[i]);
+                }
             }
+
         }
-*/
+
+        Debug::trace("Number of track feature cornerprev found: " + to_string(cornersPrev2.size()));
+
+
         /// Draw features
-        Debug::info("Size features found: " + to_string(features_found.size()));
         cv::Mat drawingPoint;
-        currFrame.copyTo(drawingPoint);
-        cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
+        currentColorImg.copyTo(drawingPoint);
+        //cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
         for( int i = 0; i < (int)cornersPrev2.size(); i++ )
         {
 
@@ -196,15 +222,18 @@ void StabilizationTestSimple2::init(){
 
         namedWindow("drawingPoint");
         imshow("drawingPoint",drawingPoint);
-        /// Transformation
-        Mat transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
 
-        // in rare cases no transform is found. We'll just use the last known good transform.
+        /// Transformation matrix: estimate the rigid transform between the two frame
+        transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
+
+        // If the transformation matrix is not found
         if(transformMatrix.data == NULL) {
             last_transformationmatrix.copyTo(transformMatrix);
         }
 
         transformMatrix.copyTo(last_transformationmatrix);
+
+        /// Smoothing part
 
         // decompose T
         double dx = transformMatrix.at<double>(0,2);
@@ -215,8 +244,9 @@ void StabilizationTestSimple2::init(){
         x += dx;
         y += dy;
         a += da;
-        std::cout << "accumulated x,y: (" << x << "," << y << ")" << endl;
+        Debug::info("accumulated x,y: ("+to_string(x) + "," + to_string(y) + ")");
 
+        //If first i on the loop, we initialize kalman filter
         if (compteur==0){
             init_kalman(x,y);
         }
@@ -242,86 +272,31 @@ void StabilizationTestSimple2::init(){
               transformMatrix.at<double>(0,2) = dx;
               transformMatrix.at<double>(1,2) = dy;
 
-              warpAffine(prevFrame,outImg,transformMatrix,prevFrame.size());
+              cv::Mat outImg;
+              warpAffine(prevFrameColor,outImg,transformMatrix,currentColorImg.size());
+             outImg = outImg(Range(border, outImg.rows-border), Range(HORIZONTAL_BORDER_CROP, outImg.cols-HORIZONTAL_BORDER_CROP));
+
 
               namedWindow("stabilized");
               imshow("stabilized",outImg);
-              namedWindow("Original");
-              imshow("Original",mask);
-              //waitKey(0);
+
+              prevFrameColor= currentColorImg.clone();
+              currentGrayImg.copyTo(prevFrameGray);
 
 
         }
+
+        cornersPrev2.clear();
+
+        cornersCurr2.clear();
+
+
          compteur++;
 
 
 
-
-
-
-        //std::cout << "type: " << VideoUtil::type2str(transformMatrix.type()) << std::endl;
-        //warpAffine(currFrame,outImg,transformMatrix,currFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
-      //  Mat transformMatrix = estimateGlobalMotionRobust(cornersPrev,cornersCurr,3,RansacParams::affine2dMotionStd(),0,0);
-
-
-       // warpPerspective(currFrame,outImg,transformMatrix,currFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
-
-       // namedWindow("Features before");
-        //imshow("Features before",drawingPoint);
-
-
-        /// Smoothing motion
-        // First predict, to update the internal statePre variable
-
-        //For each frame, we have to predict all the keypoints
-        //Initialization
-       /* for (int i=0;i<cornersCurr.size();i++){
-               init_kalman(cornersCurr.at(i).x,cornersCurr.at(i).y);
-        }
-        for (int i=0;i<cornersCurr.size();i++){
-            Point2f smooth_feature=kalman_predict_correct(cornersCurr.at(i).x,cornersCurr.at(i).y);
-            smooth_feature.x=(int)smooth_feature.x;
-            smooth_feature.y=(int)smooth_feature.y;
-            smooth_feature_point.push_back(smooth_feature);
-            std::cout << "smooth x,y: (" << smooth_feature.x << "," << smooth_feature.y << ")" << endl;
-        }
-*/
-         //Mat transformMatrix = estimateRigidTransform(cornersPrev,smooth_feature_point ,false);
-
-       //   Mat transformMatrix = estimateGlobalMotionRobust(cornersPrev,smooth_feature_point,3,RansacParams::affine2dMotionStd(),0,0);
-
-       //    std::cout << "type: " << VideoUtil::type2str(transformMatrix.type()) << std::endl;
-
-       // warpAffine(currFrame,outImg,transformMatrix,currFrame.size(), INTER_NEAREST|WARP_INVERSE_MAP, BORDER_CONSTANT);
-
-         //  warpPerspective(currFrame,outImg,transformMatrix,currFrame.size(), INTER_LINEAR |WARP_INVERSE_MAP,BORDER_CONSTANT ,0);
-
-
-
-
-        /*// Now draw the original and stablised side by side for coolness
-        Mat canvas = Mat::zeros(currFrame.rows, currFrame.cols*2+10, currFrame.type());
-
-        originalFrame.copyTo(canvas(Range::all(), Range(0, outImg.cols)));
-        outImg.copyTo(canvas(Range::all(), Range(outImg.cols+10, outImg.cols*2+10)));
-
-        // If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
-        if(canvas.cols > 1920) {
-            resize(canvas, canvas, Size(canvas.cols/2, canvas.rows/2));
-        }
-        //outputVideo<<canvas;
-        imshow("before and after", canvas);*/
-
-
-        //  cap.read(colorImg);
-
-
-
-
-
-
         namedWindow("Original");
-        imshow("Original",originalFrame);
+        //imshow("Original",prevFrameColor);
 
         timerFPS.stopTimerFPS();
         timerFPS.getFPS();

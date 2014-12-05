@@ -263,7 +263,8 @@ void StabilizationLive::init(){
 
         cur2 = cur2(Range(vert_border, cur2.rows-vert_border), Range(HORIZONTAL_BORDER_CROP, cur2.cols-HORIZONTAL_BORDER_CROP));
 
-
+        namedWindow("test");
+         imshow("test", cur2);
 
         //Remove dark part because of stabilization
        // cur2 = cur2(Range(50,cur2.rows-100),Range(50,cur2.cols-100));

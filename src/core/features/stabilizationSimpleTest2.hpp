@@ -23,6 +23,8 @@ public:
 
 
 public:
+    static const int HORIZONTAL_BORDER_CROP = 30; // In pixels. Crops the border once the video is stabilized.
+public:
     string path;
 
 
