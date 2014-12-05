@@ -177,7 +177,7 @@ void StabilizationTestSimple2::init(){
         // Remove bad matches
         for(size_t i=0; i < status.size(); i++) {
             double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
-            if(status[i] && motion < 20) {
+            if(status[i]) {
                 cornersPrev2.push_back(cornersPrev[i]);
                 cornersCurr2.push_back(cornersCurr[i]);
             }
@@ -196,7 +196,7 @@ void StabilizationTestSimple2::init(){
                                  opticalFlowTermCriteria);
             for(size_t i=0; i < status.size(); i++) {
                 double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
-                if(status[i] && motion < 20) {
+                if(status[i]) {
                     cornersPrev2.push_back(cornersPrev[i]);
                     cornersCurr2.push_back(cornersCurr[i]);
                 }
@@ -219,6 +219,7 @@ void StabilizationTestSimple2::init(){
             cv::circle(drawingPoint,cornersCurr2.at(i), 3, cv::Scalar(0,0,255),-1);
         }
 
+        std::cout << "Test " << std::endl;
 
         namedWindow("drawingPoint");
         imshow("drawingPoint",drawingPoint);
@@ -250,13 +251,14 @@ void StabilizationTestSimple2::init(){
         if (compteur==0){
             init_kalman(x,y);
         }
+        // Prediction step
         else {
-
 
               vector<Point2f> smooth_feature_point;
               Point2f smooth_feature=kalman_predict_correct(x,y);
               smooth_feature_point.push_back(smooth_feature);
-              std::cout << "smooth x,y: (" << smooth_feature.x << "," << smooth_feature.y << ")" << endl;
+              Debug::trace("smooth x,y: ("+to_string(smooth_feature.x) + "," + to_string(smooth_feature.y) + ")");
+
 
               // target - current
               double diff_x = smooth_feature.x - x;//
@@ -265,6 +267,7 @@ void StabilizationTestSimple2::init(){
               dx = dx + diff_x;
               dy = dy + diff_y;
 
+              //Reconstruction of the matrix
               transformMatrix.at<double>(0,0) = cos(da);
               transformMatrix.at<double>(0,1) = -sin(da);
               transformMatrix.at<double>(1,0) = sin(da);
@@ -273,31 +276,32 @@ void StabilizationTestSimple2::init(){
               transformMatrix.at<double>(1,2) = dy;
 
               cv::Mat outImg;
+              /// Application of the transformation with the new matrix
               warpAffine(prevFrameColor,outImg,transformMatrix,currentColorImg.size());
-             outImg = outImg(Range(border, outImg.rows-border), Range(HORIZONTAL_BORDER_CROP, outImg.cols-HORIZONTAL_BORDER_CROP));
+              //Crop the dark border du to the stabilization
+              outImg = outImg(Range(border, outImg.rows-border), Range(HORIZONTAL_BORDER_CROP, outImg.cols-HORIZONTAL_BORDER_CROP));
 
 
+              //Display
               namedWindow("stabilized");
               imshow("stabilized",outImg);
 
+              /// change the frame
               prevFrameColor= currentColorImg.clone();
               currentGrayImg.copyTo(prevFrameGray);
 
 
         }
 
+        // Delete the features, in order to re compute nb_max again
         cornersPrev2.clear();
 
         cornersCurr2.clear();
 
 
-         compteur++;
+        compteur++;
 
-
-
-        namedWindow("Original");
-        //imshow("Original",prevFrameColor);
-
+        // get the fps
         timerFPS.stopTimerFPS();
         timerFPS.getFPS();
 
