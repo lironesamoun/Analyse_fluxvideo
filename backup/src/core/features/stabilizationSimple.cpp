@@ -16,8 +16,8 @@ using namespace cv::videostab;
 namespace drone
 {
 
-StabilizationSimple::StabilizationSimple(){
-
+StabilizationSimple::StabilizationSimple(string &path){
+    this->path=path;
 }
 
 

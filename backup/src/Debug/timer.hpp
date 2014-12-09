@@ -15,13 +15,23 @@ namespace drone
 class Timer
 {
 public:
+    Timer();
+
+public:
     void startTimer();
     void stopTimer();
     long getTime();
+    void startTimerFPS();
+    void stopTimerFPS();
+    double getFPS();
 
-private:
+
     timeval m_start;
     timeval m_end;
+    time_t start, end;
+    double fps;
+    int counter;
+    double sec;
 
 };//Timer
 

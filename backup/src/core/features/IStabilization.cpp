@@ -22,7 +22,7 @@ IStabilization::IStabilization(){
 
 void IStabilization::run(string& path,int method){
     if (method==ISTABILIZATION_PREPROCESSING){
-        StabilizationSimple stabSimple;
+        StabilizationSimple stabSimple(path);
         stabSimple.run(path);
     }
 }

@@ -26,32 +26,23 @@ int main(int argc, char *argv[])
     bool stepFrame=false;
     // fps counter end
 
-
-
-
     Timer timerMain;
     timerMain.startTimer();
-    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/test.avi";
-    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
-    StabilizationTestSimple stabTest(path1);
-    //stabTest.init();
-
-    StabilizationTestSimple2 stabTest2(path1);
-    stabTest2.init();
-
+    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/morceau2CV.avi";
+    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau2.avi";
     StabilizationOpenCv stabopenCv(path1,outputPath);
-    //stabopenCv.init();
-    //StabilizationSimple stabSimple(path1);
+   // stabopenCv.init();
+    StabilizationSimple stabSimple(path1);
     // stabSimple.init();
     StabilizationLive stabLive(path1);
-    //  stabLive.init();
+     // stabLive.init();
+    StabilizationTestSimple stabTest(path1);
+     stabTest.init();
+    StabilizationTestSimple2 stabTest2(path1);
+   // stabTest2.init();
 
 
 
-
-   /*int method1=IStabilization::ISTABILIZATION_PREPROCESSING;
-   IStabilization stabilization;
-   stabilization.run(path1,method1);*/
 }
 
 
@@ -128,4 +119,3 @@ int main(int argc, char *argv[])
 
 
 }*/
-

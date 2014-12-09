@@ -21,7 +21,7 @@ StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool st
     motionFilter(mFilter),est_trime(trime){
 
     this->path=path;
-    this->outputPath;
+    this->outputPath=outputPath;
 
 }
 
@@ -29,29 +29,42 @@ StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool st
 
 void StabilizationOpenCv::run()
 {
-    VideoWriter writer;
+    Timer fpsTime;
+    fpsTime.startTimerFPS();
+
     Mat stabilizedFrame;
 
+    VideoWriter writer(outputPath, CV_FOURCC('X','V','I','D'),11,stabilizedFrames->nextFrame().size());
+    if ( !writer.isOpened() ) //if not initialize the VideoWriter successfully, exit the program
+    {
+        drone_error("ERROR: Failed to write the video");
+
+    }
     while (!(stabilizedFrame = stabilizedFrames->nextFrame()).empty())
     {
         if (save_motion)
-            std::cout << "Save motion" << std::endl;
+
             saveMotionsIfNecessary();
         if (!outputPath.empty())
         {
-            std::cout << "Save motion path not empty" << std::endl;
-            if (!writer.isOpened())
-                writer.open(outputPath, CV_FOURCC('X','V','I','D'), outputFps, stabilizedFrame.size());
+            std::cerr << "Save motion path not empty" << std::endl;
+
+
+
             writer << stabilizedFrame;
         }
 
-            imshow("stabilizedFrame", stabilizedFrame);
-            char key = static_cast<char>(waitKey(3));
-            if (key == 27)
-                break;
+        fpsTime.stopTimerFPS();
+        fpsTime.getFPS();
+        imshow("stabilizedFrame", stabilizedFrame);
+        char key = static_cast<char>(waitKey(3));
+
+        if (key == 27){
+            writer.release();
+            break;}
 
     }
-
+    writer.release();
     cout << "\nfinished\n";
 }
 
@@ -80,11 +93,14 @@ void StabilizationOpenCv::saveMotionsIfNecessary()
         areMotionsSaved = true;
         cout << "motions are saved";
     }
+
 }
 
 void StabilizationOpenCv::init(){
+
     try
     {
+
 
         StabilizerBase *stabilizer;
         GaussianMotionFilter *motionFilter = 0;
@@ -122,11 +138,11 @@ void StabilizationOpenCv::init(){
 
         PyrLkRobustMotionEstimator *motionEstimator = new PyrLkRobustMotionEstimator();
         //Type d'estimation
-            motionEstimator->setMotionModel(TRANSLATION);
+        motionEstimator->setMotionModel(TRANSLATION);
 
-//Outlier ratio
-            RansacParams ransacParams = motionEstimator->ransacParams();
-            motionEstimator->setRansacParams(ransacParams);
+        //Outlier ratio
+        RansacParams ransacParams = motionEstimator->ransacParams();
+        motionEstimator->setRansacParams(ransacParams);
 
 
 
@@ -145,7 +161,9 @@ void StabilizationOpenCv::init(){
     }
     stabilizedFrames.release();
 
+
 }
+
 
 
 }

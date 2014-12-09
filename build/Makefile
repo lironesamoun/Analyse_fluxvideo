@@ -183,29 +183,29 @@ src/core/features/IStabilization.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/IStabilization.cpp.s
 .PHONY : src/core/features/IStabilization.cpp.s
 
-src/core/features/stabilizationLive.o: src/core/features/stabilizationLive.cpp.o
-.PHONY : src/core/features/stabilizationLive.o
+src/core/features/stabilizationKalman.o: src/core/features/stabilizationKalman.cpp.o
+.PHONY : src/core/features/stabilizationKalman.o
 
 # target to build an object file
-src/core/features/stabilizationLive.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.o
-.PHONY : src/core/features/stabilizationLive.cpp.o
+src/core/features/stabilizationKalman.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationKalman.cpp.o
+.PHONY : src/core/features/stabilizationKalman.cpp.o
 
-src/core/features/stabilizationLive.i: src/core/features/stabilizationLive.cpp.i
-.PHONY : src/core/features/stabilizationLive.i
+src/core/features/stabilizationKalman.i: src/core/features/stabilizationKalman.cpp.i
+.PHONY : src/core/features/stabilizationKalman.i
 
 # target to preprocess a source file
-src/core/features/stabilizationLive.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.i
-.PHONY : src/core/features/stabilizationLive.cpp.i
+src/core/features/stabilizationKalman.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationKalman.cpp.i
+.PHONY : src/core/features/stabilizationKalman.cpp.i
 
-src/core/features/stabilizationLive.s: src/core/features/stabilizationLive.cpp.s
-.PHONY : src/core/features/stabilizationLive.s
+src/core/features/stabilizationKalman.s: src/core/features/stabilizationKalman.cpp.s
+.PHONY : src/core/features/stabilizationKalman.s
 
 # target to generate assembly for a file
-src/core/features/stabilizationLive.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationLive.cpp.s
-.PHONY : src/core/features/stabilizationLive.cpp.s
+src/core/features/stabilizationKalman.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationKalman.cpp.s
+.PHONY : src/core/features/stabilizationKalman.cpp.s
 
 src/core/features/stabilizationOpenCv.o: src/core/features/stabilizationOpenCv.cpp.o
 .PHONY : src/core/features/stabilizationOpenCv.o
@@ -230,78 +230,6 @@ src/core/features/stabilizationOpenCv.s: src/core/features/stabilizationOpenCv.c
 src/core/features/stabilizationOpenCv.cpp.s:
 	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationOpenCv.cpp.s
 .PHONY : src/core/features/stabilizationOpenCv.cpp.s
-
-src/core/features/stabilizationSimple.o: src/core/features/stabilizationSimple.cpp.o
-.PHONY : src/core/features/stabilizationSimple.o
-
-# target to build an object file
-src/core/features/stabilizationSimple.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.o
-.PHONY : src/core/features/stabilizationSimple.cpp.o
-
-src/core/features/stabilizationSimple.i: src/core/features/stabilizationSimple.cpp.i
-.PHONY : src/core/features/stabilizationSimple.i
-
-# target to preprocess a source file
-src/core/features/stabilizationSimple.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.i
-.PHONY : src/core/features/stabilizationSimple.cpp.i
-
-src/core/features/stabilizationSimple.s: src/core/features/stabilizationSimple.cpp.s
-.PHONY : src/core/features/stabilizationSimple.s
-
-# target to generate assembly for a file
-src/core/features/stabilizationSimple.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimple.cpp.s
-.PHONY : src/core/features/stabilizationSimple.cpp.s
-
-src/core/features/stabilizationSimpleTest.o: src/core/features/stabilizationSimpleTest.cpp.o
-.PHONY : src/core/features/stabilizationSimpleTest.o
-
-# target to build an object file
-src/core/features/stabilizationSimpleTest.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.o
-.PHONY : src/core/features/stabilizationSimpleTest.cpp.o
-
-src/core/features/stabilizationSimpleTest.i: src/core/features/stabilizationSimpleTest.cpp.i
-.PHONY : src/core/features/stabilizationSimpleTest.i
-
-# target to preprocess a source file
-src/core/features/stabilizationSimpleTest.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.i
-.PHONY : src/core/features/stabilizationSimpleTest.cpp.i
-
-src/core/features/stabilizationSimpleTest.s: src/core/features/stabilizationSimpleTest.cpp.s
-.PHONY : src/core/features/stabilizationSimpleTest.s
-
-# target to generate assembly for a file
-src/core/features/stabilizationSimpleTest.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest.cpp.s
-.PHONY : src/core/features/stabilizationSimpleTest.cpp.s
-
-src/core/features/stabilizationSimpleTest2.o: src/core/features/stabilizationSimpleTest2.cpp.o
-.PHONY : src/core/features/stabilizationSimpleTest2.o
-
-# target to build an object file
-src/core/features/stabilizationSimpleTest2.cpp.o:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.o
-.PHONY : src/core/features/stabilizationSimpleTest2.cpp.o
-
-src/core/features/stabilizationSimpleTest2.i: src/core/features/stabilizationSimpleTest2.cpp.i
-.PHONY : src/core/features/stabilizationSimpleTest2.i
-
-# target to preprocess a source file
-src/core/features/stabilizationSimpleTest2.cpp.i:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.i
-.PHONY : src/core/features/stabilizationSimpleTest2.cpp.i
-
-src/core/features/stabilizationSimpleTest2.s: src/core/features/stabilizationSimpleTest2.cpp.s
-.PHONY : src/core/features/stabilizationSimpleTest2.s
-
-# target to generate assembly for a file
-src/core/features/stabilizationSimpleTest2.cpp.s:
-	$(MAKE) -f CMakeFiles/my_exe.dir/build.make CMakeFiles/my_exe.dir/src/core/features/stabilizationSimpleTest2.cpp.s
-.PHONY : src/core/features/stabilizationSimpleTest2.cpp.s
 
 src/core/image.o: src/core/image.cpp.o
 .PHONY : src/core/image.o
@@ -393,21 +321,12 @@ help:
 	@echo "... src/core/features/IStabilization.o"
 	@echo "... src/core/features/IStabilization.i"
 	@echo "... src/core/features/IStabilization.s"
-	@echo "... src/core/features/stabilizationLive.o"
-	@echo "... src/core/features/stabilizationLive.i"
-	@echo "... src/core/features/stabilizationLive.s"
+	@echo "... src/core/features/stabilizationKalman.o"
+	@echo "... src/core/features/stabilizationKalman.i"
+	@echo "... src/core/features/stabilizationKalman.s"
 	@echo "... src/core/features/stabilizationOpenCv.o"
 	@echo "... src/core/features/stabilizationOpenCv.i"
 	@echo "... src/core/features/stabilizationOpenCv.s"
-	@echo "... src/core/features/stabilizationSimple.o"
-	@echo "... src/core/features/stabilizationSimple.i"
-	@echo "... src/core/features/stabilizationSimple.s"
-	@echo "... src/core/features/stabilizationSimpleTest.o"
-	@echo "... src/core/features/stabilizationSimpleTest.i"
-	@echo "... src/core/features/stabilizationSimpleTest.s"
-	@echo "... src/core/features/stabilizationSimpleTest2.o"
-	@echo "... src/core/features/stabilizationSimpleTest2.i"
-	@echo "... src/core/features/stabilizationSimpleTest2.s"
 	@echo "... src/core/image.o"
 	@echo "... src/core/image.i"
 	@echo "... src/core/image.s"

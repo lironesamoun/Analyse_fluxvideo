@@ -1,8 +1,28 @@
-#include "../src/Debug/timer.hpp"
+#include "timer.hpp"
 #include "math.h"
 
 namespace drone
 {
+
+Timer::Timer(){
+    this->counter=0;
+}
+
+void Timer::startTimerFPS(){
+     time(&start);
+}
+
+void Timer::stopTimerFPS(){
+    time(&end);
+    ++counter;
+    sec = difftime (end, start);
+    fps = counter / sec;
+
+}
+
+double Timer::getFPS(){
+       std::cout << "current fps: " << fps << std::endl;
+}
 
 void Timer::startTimer(){
     gettimeofday(&m_start,NULL);

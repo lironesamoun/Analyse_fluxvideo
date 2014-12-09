@@ -22,7 +22,7 @@ namespace drone
 class StabilizationSimple
 {
 public:
-    StabilizationSimple();
+    StabilizationSimple(string& path);
 
     void run(string& path);
 

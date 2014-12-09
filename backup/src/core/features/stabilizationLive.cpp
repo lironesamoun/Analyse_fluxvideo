@@ -12,9 +12,13 @@ using namespace std;
 using namespace cv;
 using namespace cv::videostab;
 
-
+//Declare Kalman Filter
+ KalmanFilter KF (4,2,0);
+ Mat_<float> state (4,1);
+ Mat_<float> measurement (2,1);
 namespace drone
 {
+
 struct TransformParam
 {
     TransformParam() {}
@@ -65,6 +69,35 @@ struct Trajectory
     double y;
     double a; // angle
 };
+void StabilizationLive::init_kalman(double x, double y)
+{
+
+     KF.statePre.at<float>(0) = x;
+     KF.statePre.at<float>(1) = y;
+     KF.statePre.at<float>(2) = 0;
+     KF.statePre.at<float>(3) = 0;
+
+     KF.transitionMatrix = *(Mat_<float>(4,4) << 1,0,1,0,    0,1,0,1,     0,0,1,0,   0,0,0,1);
+     KF.processNoiseCov = *(Mat_<float>(4,4) << 0.2,0,0.2,0,  0,0.2,0,0.2,  0,0,0.3,0,
+                                                                                  0,0,0,0.3);
+     setIdentity(KF.measurementMatrix);
+     setIdentity(KF.processNoiseCov,Scalar::all(1e-6));
+     setIdentity(KF.measurementNoiseCov,Scalar::all(1e-1));
+     setIdentity(KF.errorCovPost, Scalar::all(.1));
+}
+
+Point2f StabilizationLive::kalman_predict_correct(double x, double y)
+{
+     Mat prediction = KF.predict();
+     Point2f predictPt (prediction.at<float>(0), prediction.at<float>(1));
+     std::cout << "predicted x,y: (" << predictPt.x << "," << predictPt.y << ")" << endl;
+     measurement(0) = x;
+     measurement(1) = y;
+     Mat estimated = KF.correct(measurement);
+     Point2f statePt (estimated.at<float>(0), estimated.at<float>(1));
+     return statePt;
+}
+
 
 
 StabilizationLive::StabilizationLive(string &path){
@@ -176,6 +209,7 @@ void StabilizationLive::init(){
         x += dx;
         y += dy;
         a += da;
+           std::cout << "accumulated x,y: (" << x << "," << y << ")" << endl;
         //trajectory.push_back(Trajectory(x,y,a));
         //
         out_trajectory << k << " " << x << " " << y << " " << a << endl;
@@ -186,9 +220,11 @@ void StabilizationLive::init(){
             // intial guesses
             X = Trajectory(0,0,0); //Initial estimate,  set 0
             P =Trajectory(1,1,1); //set error variance,set 1
+
         }
         else
         {
+
 
             X_ = X; //X_(k) = X(k-1);
             P_ = P+Q; //P_(k) = P(k-1)+Q;
@@ -227,10 +263,11 @@ void StabilizationLive::init(){
 
         cur2 = cur2(Range(vert_border, cur2.rows-vert_border), Range(HORIZONTAL_BORDER_CROP, cur2.cols-HORIZONTAL_BORDER_CROP));
 
-
+        namedWindow("test");
+         imshow("test", cur2);
 
         //Remove dark part because of stabilization
-        cur2 = cur2(Range(50,cur2.rows-100),Range(50,cur2.cols-100));
+       // cur2 = cur2(Range(50,cur2.rows-100),Range(50,cur2.cols-100));
         // Resize cur2 back to cur size, for better side by side comparison
         resize(cur2, cur2, cur.size());
 

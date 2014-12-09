@@ -100,15 +100,9 @@
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/features/IStabilization.cpp">
       </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationLive.cpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationKalman.cpp">
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.cpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimple.cpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.cpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.cpp">
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/image.cpp">
       </Unit>
@@ -122,15 +116,9 @@
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/features/IStabilization.hpp">
       </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationLive.hpp">
+      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationKalman.hpp">
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationOpenCv.hpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimple.hpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest.hpp">
-      </Unit>
-      <Unit filename="/home/user/Documents/pfe_code/src/core/features/stabilizationSimpleTest2.hpp">
       </Unit>
       <Unit filename="/home/user/Documents/pfe_code/src/core/image.hpp">
       </Unit>
