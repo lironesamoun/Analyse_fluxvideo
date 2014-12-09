@@ -13,6 +13,8 @@
 #define LOGW printf
 #define LOGE printf
 
+#define drone_ensure(cond,what) if (!(cond)) drone::ensure_error(__FILE__, __LINE__, __FUNCTION__, what);
+
 namespace drone {
 
 void ensure_error(const char* file, const int line, const char* function, const char* what, int code=-1);

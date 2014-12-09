@@ -15,10 +15,9 @@ class StabilizationOpenCv
 {
 public:
 
-    StabilizationOpenCv(string& path,string& outputPath,bool stdev=false, bool save_motion=true,
+    StabilizationOpenCv(string& path,string& outputPath, bool save=true,bool stdev=false,
                         bool isTwoPass=false, bool motionFilter=false, bool est_trime=false);
     void run();
-    void saveMotionsIfNecessary();
     void init();
 
 
@@ -29,7 +28,7 @@ public:
     Ptr<IFrameSource> stabilizedFrames;
 public:
     bool stdev;
-    bool save_motion;
+    bool save;
     bool isTwoPass;
     bool motionFilter;
     bool est_trime;

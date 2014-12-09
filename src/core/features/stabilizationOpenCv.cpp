@@ -16,12 +16,12 @@ using namespace cv::videostab;
 namespace drone
 {
 
-StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool stdev, bool save,
-                                         bool twoPass, bool mFilter, bool trime):stdev(stdev),save_motion(save),isTwoPass(twoPass),
+StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool save,bool stdev ,
+                                         bool twoPass, bool mFilter, bool trime):stdev(stdev),isTwoPass(twoPass),
     motionFilter(mFilter),est_trime(trime){
 
     this->path=path;
-    this->outputPath;
+    this->outputPath=outputPath;
 
 }
 
@@ -30,62 +30,45 @@ StabilizationOpenCv::StabilizationOpenCv(string& path,string& outputPath,bool st
 void StabilizationOpenCv::run()
 {
     Timer fpsTime;
-     fpsTime.startTimerFPS();
-    VideoWriter writer;
+    fpsTime.startTimerFPS();
+
     Mat stabilizedFrame;
 
+    VideoWriter writer(outputPath, CV_FOURCC('X','V','I','D'),11,stabilizedFrames->nextFrame().size());
+    if ( !writer.isOpened() ) //if not initialize the VideoWriter successfully, exit the program
+    {
+        drone_error("ERROR: Failed to write the video");
+
+    }
     while (!(stabilizedFrame = stabilizedFrames->nextFrame()).empty())
     {
-        if (save_motion)
+        if (save){
 
-            saveMotionsIfNecessary();
-        if (!outputPath.empty())
-        {
-            std::cout << "Save motion path not empty" << std::endl;
-            if (!writer.isOpened())
-                writer.open(outputPath, CV_FOURCC('X','V','I','D'), outputFps, stabilizedFrame.size());
-            writer << stabilizedFrame;
+            if (!outputPath.empty())
+            {
+                std::cerr << "Save motion path not empty" << std::endl;
+
+
+
+                writer << stabilizedFrame;
+            }
         }
 
         fpsTime.stopTimerFPS();
         fpsTime.getFPS();
-            imshow("stabilizedFrame", stabilizedFrame);
-            char key = static_cast<char>(waitKey(3));
-            if (key == 27)
-                break;
+        imshow("stabilizedFrame", stabilizedFrame);
+        char key = static_cast<char>(waitKey(3));
+
+        if (key == 27){
+            writer.release();
+            break;}
 
     }
-
+    writer.release();
     cout << "\nfinished\n";
 }
 
 
-void StabilizationOpenCv::saveMotionsIfNecessary()
-{
-    static bool areMotionsSaved = true;
-    if (!areMotionsSaved)
-    {
-        IFrameSource *frameSource = static_cast<IFrameSource*>(stabilizedFrames);
-        TwoPassStabilizer *twoPassStabilizer = dynamic_cast<TwoPassStabilizer*>(frameSource);
-        if (twoPassStabilizer)
-        {
-            ofstream f(outputPath.c_str());
-            const vector<Mat> &motions = twoPassStabilizer->motions();
-            f << motions.size() << endl;
-            for (size_t i = 0; i < motions.size(); ++i)
-            {
-                Mat_<float> M = motions[i];
-                for (int l = 0, k = 0; l < 3; ++l)
-                    for (int s = 0; s < 3; ++s, ++k)
-                        f << M(l,s) << " ";
-                f << endl;
-            }
-        }
-        areMotionsSaved = true;
-        cout << "motions are saved";
-    }
-
-}
 
 void StabilizationOpenCv::init(){
 
@@ -129,11 +112,11 @@ void StabilizationOpenCv::init(){
 
         PyrLkRobustMotionEstimator *motionEstimator = new PyrLkRobustMotionEstimator();
         //Type d'estimation
-            motionEstimator->setMotionModel(TRANSLATION);
+        motionEstimator->setMotionModel(TRANSLATION);
 
-//Outlier ratio
-            RansacParams ransacParams = motionEstimator->ransacParams();
-            motionEstimator->setRansacParams(ransacParams);
+        //Outlier ratio
+        RansacParams ransacParams = motionEstimator->ransacParams();
+        motionEstimator->setRansacParams(ransacParams);
 
 
 

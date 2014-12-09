@@ -2,50 +2,25 @@
 
 using namespace drone;
 
-cv::Mat skipNFrames(VideoCapture& cap,cv::Mat& frame, int n)
-{
-    cv::Mat temp;
-    int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
-    Debug::info("Current frame: " + nbreCurrentFrame);
-    if (nbreCurrentFrame%(n)==0){
-        temp=frame.clone();
-    }
-
-    return temp;
-}
 
 int main(int argc, char *argv[])
 {
 
 
-    // fps counter begin
-    time_t start, end;
-    int counter = 0;
-    double sec;
-    double fps;
-    bool stepFrame=false;
-    // fps counter end
-
     Timer timerMain;
     timerMain.startTimer();
-    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/videoStabOpenCVResult/test.avi";
-    string path1="/home/sl001093/Documents/MAM5/PFE/videos/morceau3.avi";
-    StabilizationOpenCv stabopenCv(path1,outputPath);
-   // stabopenCv.init();
-    StabilizationSimple stabSimple(path1);
-    // stabSimple.init();
-    StabilizationLive stabLive(path1);
-     // stabLive.init();
-    StabilizationTestSimple stabTest(path1);
-    // stabTest.init();
-    StabilizationTestSimple2 stabTest2(path1);
-    stabTest2.init();
+    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/testttt.avi";
+    string path="/home/sl001093/Documents/MAM5/PFE/videos/morceau2.avi";
+
+
+    int method=IStabilization::ISTABILIZATION_KALMAN;
+    IStabilization Stabilisation;
+    Stabilisation.run(path,outputPath,method,false);
+
 
 
 
 }
-
-
 
 
     /*

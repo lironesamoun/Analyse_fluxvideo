@@ -12,7 +12,6 @@ namespace drone
 class VideoUtil
 {
 public:
-  double fps;
   cv::Mat frame;
 
 public:
@@ -21,9 +20,10 @@ public:
   static cv::Mat geometricalCrop(cv::Mat& frame,int lh,int lw);
   static int run(std::string& path);
   static string type2str(int type);
+  static cv::Mat computeMask(Mat& frame,int lh,int lw);
+  static cv::Mat skipNFrames(VideoCapture& cap,cv::Mat& frame, int n);
 
 public:
-    double getFps() const;
 
 
 };

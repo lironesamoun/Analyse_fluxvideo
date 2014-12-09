@@ -20,11 +20,21 @@ IStabilization::IStabilization(){
 
 }
 
-void IStabilization::run(string& path,int method){
-    if (method==ISTABILIZATION_PREPROCESSING){
-        StabilizationSimple stabSimple(path);
-        stabSimple.run(path);
+void IStabilization::run(string& path,string& outPath,int method,bool save){
+    drone_ensure(method < 2, "Method of stabilization doesn't exist");
+    if (method==IStabilization::ISTABILIZATION_OPENCV){
+           StabilizationOpenCv stabopenCv(path,outPath);
+           stabopenCv.init();
     }
+    else if (method==IStabilization::ISTABILIZATION_KALMAN){
+        StabilizationKalman stabKalman(path,outPath,save);
+        stabKalman.init();
+
+    }
+    else {
+        Debug::error("No Method selected");
+    }
+
 }
 
 }

@@ -62,5 +62,11 @@ void drone_error(const std::string& what)
 }
 
 
+void ensure_error(const char* file, const int line, const char* function, const char* what, int code)
+{
+    std::string mesg = "(ensure error) " + to_string(what);
+    drone::fatal_error(file,line,function,mesg.c_str(),code);
+}
+
 }
 

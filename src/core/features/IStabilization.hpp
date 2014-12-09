@@ -3,7 +3,7 @@
 
 #include "drone.hpp"
 #include "opencv2/videostab/stabilizer.hpp"
-#include "core/features/stabilizationSimple.hpp"
+
 
 using namespace cv;
 using namespace std;
@@ -22,13 +22,9 @@ public:
 
       static const int ISTABILIZATION_OPENCV = 0;
       static const int ISTABILIZATION_KALMAN = 1;
-      static const int ISTABILIZATION_PREPROCESSING = 2;
-
-      static const int ISTABILIZATION_BASICSURF = 3;
-      static const int IBOWFEATURE_BASICGOODFEATURE = 4;
 
 public:
-    void run(string& path,int method);
+    void run(string& path,string& outPath,int method,bool save);
 
 
 

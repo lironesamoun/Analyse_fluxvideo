@@ -83,10 +83,10 @@ int VideoUtil::run(std::string& path){
     return 0;
 }
 
-double VideoUtil::getFps() const{
-    return this->fps;
-}
 
+/**
+  Tell what kind of matrix Mat is it depending of the type . ex matrix.size()
+  **/
 string VideoUtil::type2str(int type) {
   string r;
 
@@ -108,6 +108,49 @@ string VideoUtil::type2str(int type) {
   r += (chans+'0');
 
   return r;
+}
+
+/**
+  Compute a special mask for a video
+  In this case, we have 4 subpictures in each corner
+  lh: limit of height
+  lw: limit of width
+  **/
+cv::Mat VideoUtil::computeMask(Mat& frame,int lh,int lw){
+    int height=frame.rows;
+    int width=frame.cols;
+
+    /// Creation du masque pour le calcul de point d'interet
+    int limitH=lh;
+    int limitW=lw;
+    cv::Mat mask = cv::Mat::zeros(frame.size(), CV_8UC1);  //NOTE: using the type explicitly    //Bas en haut puis gaudre à droite
+    cv::Mat roi1=frame(Range(50,limitH),Range(50,limitW));//Coin haut à gauche
+    cv::Mat roi2=frame(Range(height-limitH,height-50),Range(50,limitW));//Coinbas à gauche
+    cv::Mat roi3=frame(Range(50,limitH),Range(width-limitW,width-50));//Coin haut à droite
+    cv::Mat roi4=frame(Range(height-limitH,height-50),Range(width-limitW,width-50));//Coin bas à droite
+
+    roi1.copyTo(mask(Range(50,limitH),Range(50,limitW)));
+    roi2.copyTo(mask(Range(height-limitH,height-50),Range(50,limitW)));
+    roi3.copyTo(mask(Range(50,limitH),Range(width-limitW,width-50)));
+    roi4.copyTo(mask(Range(height-limitH,height-50),Range(width-limitW,width-50)));
+
+
+
+    return mask;
+
+}
+
+
+cv::Mat VideoUtil::skipNFrames(VideoCapture& cap,cv::Mat& frame, int n)
+{
+    cv::Mat temp;
+    int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
+    Debug::info("Current frame: " + nbreCurrentFrame);
+    if (nbreCurrentFrame%(n)==0){
+        temp=frame.clone();
+    }
+
+    return temp;
 }
 
 }
