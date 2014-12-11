@@ -27,6 +27,8 @@
 #include "core/features/stabilizationKalman.hpp"
 #include "core/features/IStabilization.hpp"
 
+#include "utilities/camshiftPerso.hpp"
+
 
 
 using namespace std;

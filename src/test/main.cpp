@@ -1,4 +1,4 @@
-#include "drone.hpp"
+/*#include "drone.hpp"
 
 using namespace drone;
 
@@ -7,23 +7,66 @@ int main(int argc, char *argv[])
 {
 
 
-    Timer timerMain;
+    Timer timerMain,timerFPS;
+    timerFPS.startTimerFPS();
     timerMain.startTimer();
-    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/testttt.avi";
-    string path="/home/sl001093/Documents/MAM5/PFE/videos/morceau2.avi";
+    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/morceau2stab.avi";
+    string path="/home/sl001093/Documents/MAM5/PFE/videos/aerial2.mp4";
 
-
+    /// STABILISATION
     int method=IStabilization::ISTABILIZATION_KALMAN;
     IStabilization Stabilisation;
-    Stabilisation.run(path,outputPath,method,false);
+
+    //Stabilisation.run(path,outputPath,method,false);
 
 
+
+
+    /// CAMSHIFT
+    CamshiftPerso cf;
+
+    bool skipFrame=false;
+
+
+    VideoCapture cap(path); // open the video file for reading
+
+
+    for(;;)
+    {
+
+
+
+        Mat frame;
+
+
+        cap>>frame;
+      //  cf.run(frame);
+
+
+
+
+
+
+        timerFPS.stopTimerFPS();
+        timerFPS.getFPS();
+
+        if(waitKey(30) == 27) //wait for 'esc' key press for 30 ms. If 'esc' key is pressed, break loop
+        {
+            cout << "esc key is pressed by user" << endl;
+            break;
+        }
+    }
+
+
+timerMain.stopTimer();
+ timerMain.getTime();
+    return 0;
 
 
 }
 
 
-    /*
+/*
     bool skipFrame=false;
 
 
@@ -93,4 +136,5 @@ int main(int argc, char *argv[])
     return 0;
 
 
-}*/
+}
+*/

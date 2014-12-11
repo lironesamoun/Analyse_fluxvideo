@@ -38,7 +38,7 @@ long Timer::getTime(){
     useconds = m_end.tv_usec - m_start.tv_usec;
 
     if (seconds >= 1 && seconds < 60){
-        std::cout << "Time required for execution: " << seconds << " sec" << std::endl;
+        std::cout << "Time required for execution: " << seconds << " sec " << std::endl;
 
 
     }

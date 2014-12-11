@@ -20,9 +20,18 @@ namespace drone
 {
 
 //Declare Kalman Filter
-KalmanFilter KF (4,2,0);
-Mat_<float> state (4,1);
-Mat_<float> measurement (2,1);
+// >>>> Kalman Filter
+int stateSize = 3;
+int measSize = 3;
+int contrSize = 0;
+
+unsigned int type = CV_32F;
+cv::KalmanFilter KF(stateSize, measSize, contrSize, type);
+cv::Mat state(stateSize, 1, type);  // [x,y,teta]
+cv::Mat measurement(measSize, 1, type);    // [z_x,z_y,z_teta]
+//  KalmanFilter KF (4,2,0);
+//Mat_<float> state (4,1);
+//Mat_<float> measurement (2,1);
 
 StabilizationKalman::StabilizationKalman(string &path,string& outputP,bool save):path(path),outputPath(outputP),save(save)
 {
@@ -30,7 +39,7 @@ StabilizationKalman::StabilizationKalman(string &path,string& outputP,bool save)
 }
 
 
-
+/*
 void StabilizationKalman::init_kalman(double x, double y)
 {
 
@@ -48,7 +57,40 @@ void StabilizationKalman::init_kalman(double x, double y)
     setIdentity(KF.errorCovPost, Scalar::all(.1));
     measurement.setTo(Scalar(0));
 }
+*/
+void StabilizationKalman::init_kalman1(double x, double y,double teta)
+{
 
+    cv::setIdentity(KF.transitionMatrix);
+    cv::setIdentity(KF.measurementMatrix);
+    Debug::trace("Kalman: transition and measurement matrix okey");
+    KF.statePre.at<float>(0) = x;
+    KF.statePre.at<float>(1) = y;
+    KF.statePre.at<float>(2) = teta;
+
+    Debug::trace("Kalman:state okey");
+    setIdentity(KF.processNoiseCov,Scalar::all(1e-2));
+    // Measures Noise Covariance Matrix R
+    cv::setIdentity(KF.measurementNoiseCov, cv::Scalar(1e-1));
+    setIdentity(KF.errorCovPost, Scalar::all(.1));
+    measurement.setTo(Scalar(0));
+    Debug::trace("Kalman: measurement 0 okey");
+}
+
+Point3f StabilizationKalman::kalman_predict_correct1(double x, double y,double teta)
+{
+    Mat prediction = KF.predict();
+    Point3f predictPt (prediction.at<float>(0), prediction.at<float>(1),prediction.at<float>(2));
+    std::cout << "predicted x,y,teta: (" << predictPt.x << "," << predictPt.y << ","  << predictPt.z << ")" << endl;
+    measurement.at<float>(0) = x;
+    measurement.at<float>(1) = y;
+    measurement.at<float>(2) = teta;
+    Mat estimated = KF.correct(measurement);
+    Point3f statePt (estimated.at<float>(0), estimated.at<float>(1), estimated.at<float>(2));
+    return statePt;
+}
+
+/*
 Point2f StabilizationKalman::kalman_predict_correct(double x, double y)
 {
     Mat prediction = KF.predict();
@@ -60,7 +102,7 @@ Point2f StabilizationKalman::kalman_predict_correct(double x, double y)
     Point2f statePt (estimated.at<float>(0), estimated.at<float>(1));
     return statePt;
 }
-
+*/
 void StabilizationKalman::init(){
 
     Timer timerFPS;
@@ -68,6 +110,9 @@ void StabilizationKalman::init(){
 
     //Crop video
     bool crop=true;
+
+    //If kalman filter is init
+    bool KalmanHasInit=false;
 
     //Number of interest points to detect
     int nb_max=100;
@@ -79,7 +124,8 @@ void StabilizationKalman::init(){
 
     // Different matrix
     Mat prevFrameColor,prevFrameGray, currentColorImg,currentGrayImg ,last_transformationmatrix;
-    Mat transformMatrix(2,3,CV_64F);
+    Mat transformMatrix= Mat::zeros(2,3,CV_64F);
+
 
     //Read the video
     VideoCapture cap(path);
@@ -142,6 +188,7 @@ void StabilizationKalman::init(){
     /// Improve the accuracy of features
     cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
 
+    ;
     // For all the frame
     while(compteur<nbre_frame){
         int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
@@ -175,6 +222,7 @@ void StabilizationKalman::init(){
                              opticalFlowTermCriteria);
 
 
+
         // Remove bad matches
         for(size_t i=0; i < status.size(); i++) {
             double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
@@ -186,7 +234,7 @@ void StabilizationKalman::init(){
 
         /// If the number of features decrease, we re-compute features to track them (same step as above)
         if (compteur%50==0){
-
+            std::cout << "okey " << std::endl;
             cornersCurr2.clear();
             cornersPrev2.clear();
             cv::goodFeaturesToTrack(prevFrameGray,cornersPrev,nb_max,0.01,5.0,prevFrameGray);
@@ -196,6 +244,7 @@ void StabilizationKalman::init(){
             cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
             calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,cornersPrev,cornersCurr,status,errors,Size(20,20),3,
                                  opticalFlowTermCriteria);
+
             for(size_t i=0; i < status.size(); i++) {
                 double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
                 if(status[i]) {
@@ -207,118 +256,144 @@ void StabilizationKalman::init(){
         }
 
         Debug::trace("Number of track feature cornerprev found: " + to_string(cornersPrev2.size()));
+/* namedWindow("Frame");
+        imshow("Frame",currFrameGray);
+        waitKey(0);*/
+
+        if (!cornersPrev2.empty()){
+
+            /// Draw features
+            cv::Mat drawingPoint;
+            currentColorImg.copyTo(drawingPoint);
+            //cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
+            for( int i = 0; i < (int)cornersPrev2.size(); i++ )
+            {
+
+                line (drawingPoint, cornersPrev2.at(i),
+                      cornersCurr2.at(i),cv::Scalar(0,0,255));
+                cv::circle(drawingPoint,cornersCurr2.at(i), 3, cv::Scalar(0,0,255),-1);
+            }
 
 
-        /// Draw features
-        cv::Mat drawingPoint;
-        currentColorImg.copyTo(drawingPoint);
-        //cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
-        for( int i = 0; i < (int)cornersPrev2.size(); i++ )
-        {
 
-            line (drawingPoint, cornersPrev2.at(i),
-                  cornersCurr2.at(i),cv::Scalar(0,0,255));
-            cv::circle(drawingPoint,cornersCurr2.at(i), 3, cv::Scalar(0,0,255),-1);
-        }
+            namedWindow("drawingPoint");
+            imshow("drawingPoint",drawingPoint);
 
+            /// Transformation matrix: estimate the rigid transform between the two frame
+            transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
 
+            // If the transformation matrix is not found
+            if(transformMatrix.data == NULL) {
+                if (last_transformationmatrix.data==NULL){
+                    Mat transformMatrix= Mat::zeros(2,3,CV_64F);
+                    Debug::trace("Dans IF: " + to_string(transformMatrix.size()));
+                }
+                else {
+                    Debug::trace("Transformation matrix null avant");
+                    last_transformationmatrix.copyTo(transformMatrix);
+                    Debug::trace("Transformation matrix null après");
+                }
+            }
 
-        namedWindow("drawingPoint");
-        imshow("drawingPoint",drawingPoint);
-
-        /// Transformation matrix: estimate the rigid transform between the two frame
-        transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
-
-        // If the transformation matrix is not found
-        if(transformMatrix.data == NULL) {
-            last_transformationmatrix.copyTo(transformMatrix);
-        }
-
-        transformMatrix.copyTo(last_transformationmatrix);
-
-        /// Smoothing part
-
-        // decompose T
-        double dx = transformMatrix.at<double>(0,2);
-        double dy = transformMatrix.at<double>(1,2);
-        double da = atan2(transformMatrix.at<double>(1,0), transformMatrix.at<double>(0,0));
-
-        // Accumulated frame to frame transform
-        x += dx;
-        y += dy;
-        a += da;
-        Debug::info("accumulated x,y: ("+to_string(x) + "," + to_string(y) + ")");
-
-        //If first i on the loop, we initialize kalman filter
-        if (compteur==0){
-            init_kalman(x,y);
-        }
-        // Prediction step
-        else {
-
-            vector<Point2f> smooth_feature_point;
-            Point2f smooth_feature=kalman_predict_correct(x,y);
-            smooth_feature_point.push_back(smooth_feature);
-            Debug::trace("smooth x,y: ("+to_string(smooth_feature.x) + "," + to_string(smooth_feature.y) + ")");
+            transformMatrix.copyTo(last_transformationmatrix);
 
 
-            // target - current
-            double diff_x = smooth_feature.x - x;//
-            double diff_y = smooth_feature.y - y;
+            /// Smoothing part
 
-            dx = dx + diff_x;
-            dy = dy + diff_y;
-
-            //Reconstruction of the matrix
-            transformMatrix.at<double>(0,0) = cos(da);
-            transformMatrix.at<double>(0,1) = -sin(da);
-            transformMatrix.at<double>(1,0) = sin(da);
-            transformMatrix.at<double>(1,1) = cos(da);
-            transformMatrix.at<double>(0,2) = dx;
-            transformMatrix.at<double>(1,2) = dy;
-
-            cv::Mat outImg;
-            /// Application of the transformation with the new matrix
-            warpAffine(prevFrameColor,outImg,transformMatrix,currentColorImg.size());
-            //Crop the dark border du to the stabilization
-            outImg = outImg(Range(border, outImg.rows-border), Range(HORIZONTAL_BORDER_CROP, outImg.cols-HORIZONTAL_BORDER_CROP));
+            // decompose T
+            if (!transformMatrix.empty()){
 
 
-            //Display
-            namedWindow("stabilized");
-            imshow("stabilized",outImg);
 
-            /// change the frame
-            prevFrameColor= currentColorImg.clone();
-            currentGrayImg.copyTo(prevFrameGray);
+                double dx = transformMatrix.at<double>(0,2);
+                double dy = transformMatrix.at<double>(1,2);
+                double da = atan2(transformMatrix.at<double>(1,0), transformMatrix.at<double>(0,0));
+                Debug::trace("Donnés recupéres: ");
 
-            resize(outImg, outImg, currentColorImg.size());
+                // Accumulated frame to frame transform
+                x += dx;
+                y += dy;
+                a += da;
+                Debug::info("accumulated x,y,teta: ("+to_string(x) + "," + to_string(y) + "," + to_string(a) + ")");
 
-            // Now draw the original and stablised side by side for coolness
-            Mat canvas = Mat::zeros(currentColorImg.rows, currentColorImg.cols*2+10, currentColorImg.type());
+                //If first i on the loop, we initialize kalman filter
+                if (!KalmanHasInit){
+                    // init_kalman(x,y);
+                    Debug::trace("Init Kalman");
+                    init_kalman1(x,y,a);
+                    KalmanHasInit=true;
+                }
+                // Prediction step
+                else {
 
-            prevFrameColor.copyTo(canvas(Range::all(), Range(0, outImg.cols)));
-            outImg.copyTo(canvas(Range::all(), Range(outImg.cols+10, outImg.cols*2+10)));
+                    // vector<Point2f> smooth_feature_point;
+                    //Point2f smooth_feature=kalman_predict_correct(x,y);
+                    vector<Point3f> smooth_feature_point;
+                    Point3f smooth_feature=kalman_predict_correct1(x,y,a);
+                    smooth_feature_point.push_back(smooth_feature);
+                    Debug::trace("smooth x,y,teta: ("+to_string(smooth_feature.x) + "," + to_string(smooth_feature.y) +  "," + to_string(smooth_feature.z) +")");
 
-            // If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
-            /*     if(canvas.cols > 1920) {
+
+                    // target - current
+                    double diff_x = smooth_feature.x - x;//
+                    double diff_y = smooth_feature.y - y;
+                    double diff_a = smooth_feature.z - a;
+
+                    dx = dx + diff_x;
+                    dy = dy + diff_y;
+                    da = da + diff_a;
+
+                    //Reconstruction of the matrix
+                    transformMatrix.at<double>(0,0) = cos(da);
+                    transformMatrix.at<double>(0,1) = -sin(da);
+                    transformMatrix.at<double>(1,0) = sin(da);
+                    transformMatrix.at<double>(1,1) = cos(da);
+                    transformMatrix.at<double>(0,2) = dx;
+                    transformMatrix.at<double>(1,2) = dy;
+
+                    cv::Mat outImg;
+                    /// Application of the transformation with the new matrix
+                    warpAffine(prevFrameColor,outImg,transformMatrix,currentColorImg.size());
+                    //Crop the dark border du to the stabilization
+                    outImg = outImg(Range(border, outImg.rows-border), Range(HORIZONTAL_BORDER_CROP, outImg.cols-HORIZONTAL_BORDER_CROP));
+
+
+                    //Display
+                    namedWindow("stabilized");
+                    imshow("stabilized",outImg);
+
+                    /// change the frame
+                    prevFrameColor= currentColorImg.clone();
+                    currentGrayImg.copyTo(prevFrameGray);
+
+                    resize(outImg, outImg, currentColorImg.size());
+
+                    // Now draw the original and stablised side by side for coolness
+                    Mat canvas = Mat::zeros(currentColorImg.rows, currentColorImg.cols*2+10, currentColorImg.type());
+
+                    prevFrameColor.copyTo(canvas(Range::all(), Range(0, outImg.cols)));
+                    outImg.copyTo(canvas(Range::all(), Range(outImg.cols+10, outImg.cols*2+10)));
+
+                    // If too big to fit on the screen, then scale it down by 2, hopefully it'll fit :)
+                    /*     if(canvas.cols > 1920) {
                 resize(canvas, canvas, Size(canvas.cols/1.5, canvas.rows));
             }
 */
 
 
-            // namedWindow("Stabilization");
-            //imshow("Stabilization",canvas);
+                    // namedWindow("Stabilization");
+                    //imshow("Stabilization",canvas);
 
 
-            //  video.write(canvas);
-            if (save){
-                video << outImg;
+                    //  video.write(canvas);
+                    if (save){
+                        video << outImg;
+                    }
+
+
+                }
             }
-
-
         }
-
         // Delete the features, in order to re compute nb_max again
         cornersPrev2.clear();
 
