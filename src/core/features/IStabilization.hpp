@@ -5,6 +5,10 @@
 #include "opencv2/videostab/stabilizer.hpp"
 
 
+/**
+  Author: @LironeSamoun Student of Polytech Nice Sophia Antipolis
+  **/
+
 using namespace cv;
 using namespace std;
 using namespace cv::videostab;

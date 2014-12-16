@@ -1,6 +1,10 @@
 #ifndef DRONE_STABILIZATIONKALMAN_HPP
 #define DRONE_STABILIZATIONKALMAN_HPP
 
+/**
+  Author: @LironeSamoun Student of Polytech Nice Sophia Antipolis
+  **/
+
 #include "drone.hpp"
 #include "opencv2/videostab/stabilizer.hpp"
 

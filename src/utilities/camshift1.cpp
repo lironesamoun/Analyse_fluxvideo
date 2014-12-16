@@ -28,7 +28,10 @@ int S_MAX = 255; // maximum Saturation
 int V_MIN = 0; // minimum Value
 int V_MAX = 255; //maximum Value
 const string trackbarWindowName = "Trackbars";
-
+bool color_define=false;
+int centerHue;
+int centerSat;
+int centerVal;
 static void onMouse( int event, int x, int y, int, void* )
 {
     if( selectObject )
@@ -91,20 +94,39 @@ void createTrackbars(){
 int main( int argc, const char** argv )
 {
 
-
+    bool save=false;
 
     Rect trackWindow;
 
-    int hbins = 30, sbins = 32; //number of bin
+    /*  int hbins = 30, sbins = 32; //number of bin
     int histSize[] = {hbins, sbins};
     float hranges[] = { 0, 180 };//hue range
     float sranges[] = { 0, 256 };//Saturation range
     const float* ranges[] = { hranges, sranges };//hue and saturation range
     MatND hist= Mat::zeros(200,320,CV_8UC3);//Histogramme
-    int ch[] = { 0, 1 }; // Index for hue and saturation channel
+    int ch[] = { 0, 1 }; // Index for hue and saturation channel*/
+    int hsize = 32; //Number of bin
+    float hranges[] = {0,180};//Range value.  varies from 0 to 179
+    const float* phranges = hranges;
+    int ch[]={0}; //Index for hue channel
 
-    string path="/home/sl001093/Documents/MAM5/PFE/videos/aerial3.mp4";
+
+    string path="/home/sl001093/Documents/MAM5/PFE/videos/Merio/merio2.avi";
+    string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/Merio/save.mp4";
     VideoCapture cap(path);
+    int fpsOriginal=cap.get(CV_CAP_PROP_FPS);
+
+    Mat frameRecord;
+
+    cap.read(frameRecord);
+
+    VideoWriter video;
+    if (save){
+        Size frameSize(static_cast<int>(frameRecord.cols), static_cast<int>(frameRecord.rows));
+        video =VideoWriter (outputPath, CV_FOURCC('X','V','I','D') ,fpsOriginal, frameSize,true);
+
+    }
+
 
     if( !cap.isOpened() )
     {
@@ -121,17 +143,21 @@ int main( int argc, const char** argv )
 
 
 
-    Mat frame, hsv, hue, mask, backproj;
+    Mat frame, hsvRoi,hsvImage,trackSelectedRegionHsv, trackSelectedRegionHue, hue, mask, backproj,hist;
+    Mat imageDraw;
     bool paused = false;
 
     for(;;)
     {
 
+
         if( !paused )
         {
+
             cap >> frame;
             if( frame.empty() )
                 break;
+
         }
 
         frame.copyTo(image);
@@ -144,48 +170,174 @@ int main( int argc, const char** argv )
             kSize.width = 5;
             double sigma = 0.3*(3/2 - 1) + 0.8;
             GaussianBlur(image,image,kSize,sigma,0.0,4);
-            cvtColor(image, hsv, COLOR_BGR2HSV);
+            cvtColor(image, hsvImage, COLOR_BGR2HSV);
 
 
             if( trackObject )
             {
                 int lw=100;
                 int lh=100;
-
+                imageDraw=image.clone();
                 /// Compute value of inRange
-                rectangle(image,selection,Scalar(255,255,255),2);
+                rectangle(imageDraw,selection,Scalar(255,255,255),2);
 
-                //Define a ROI around the selected region
+                //Define a ROI around the selected region. It's a roi where we gonna backproject
                 cv::Rect rectTrackRegion;
                 int centerX=(selection.x)+selection.width/2;
                 int centerY=(selection.y)+selection.height/2;
+                cv::circle(imageDraw,Point(centerX,centerY),3,Scalar(255,255,255));
                 rectTrackRegion.x=centerX-lw;
                 rectTrackRegion.y=centerY-lh;
-                rectTrackRegion.width=selection.width*2+lw;
-                rectTrackRegion.height=selection.height*2+lh;
 
-                 rectangle(image,rectTrackRegion,Scalar(255,0,0),2);
+                rectTrackRegion.width=selection.width/2 + lw + selection.width;
+                rectTrackRegion.height=selection.height/2 +lh + selection.height;
 
-                Mat roiSelected(image, selection);
+                rectangle(imageDraw,rectTrackRegion,Scalar(255,0,0),2);
+
+                Mat roiSelected(image, selection),trackSelectedWindow(image,rectTrackRegion);
                 namedWindow("roi");
                 imshow("roi",roiSelected);
+                namedWindow("trackRegion");
+                imshow("trackRegion",trackSelectedWindow);
+                cvtColor(trackSelectedWindow, trackSelectedRegionHsv, CV_BGR2HSV); //HSV convertion for region around selected region
+                vector<Mat> channels1;
+                split(trackSelectedRegionHsv, channels1);
+                trackSelectedRegionHue = channels1[0];
+                // int ch[] = {0, 0};
+                //hueTrackSelected.create(trackSelectedRegionHsv.size(), trackSelectedRegionHsv.depth());
+                //mixChannels(&trackSelectedRegionHsv, 1, &hueTrackSelected, 1, ch, 1);
 
-                cvtColor(roiSelected, hsv, CV_BGR2HSV); //HSV convertion
 
-                //int _vmin = vmin, _vmax = vmax;
+                cvtColor(roiSelected, hsvRoi, CV_BGR2HSV); //HSV convertion for selected region
+                namedWindow("roiHsv");
+                imshow("roiHsv",hsvRoi);
 
 
-                // inRange(hsv, Scalar(0, smin, MIN(_vmin,_vmax)),
-                //       Scalar(180, 256, MAX(_vmin, _vmax)), mask);
+                if (color_define==false){
+                    //Get specific hue,sat, value for the selected roi
+                    vector<Mat> channels;
+                    split(hsvRoi, channels);
+                    Mat hueRoi = channels[0];
+                    Mat satRoi = channels[1];
+                    Mat valRoi = channels[2];
+
+
+                    centerHue=(int)hueRoi.at<uchar>(hueRoi.rows/2,hueRoi.cols/2);
+                    centerSat=(int)satRoi.at<uchar>(satRoi.rows/2,satRoi.cols/2);
+                    centerVal=(int)valRoi.at<uchar>(valRoi.rows/2,valRoi.cols/2);
+                    /*
+                  std::cout << "region center hue: " << (centerHue) << std::endl;
+                   std::cout << "region center sat: " << (centerSat) << std::endl;
+                    std::cout << "region center val: " << (centerVal) << std::endl;
+*/
+                    color_define=true;
+
+                }
+                inRange(trackSelectedRegionHsv, Scalar(centerHue-30, centerSat-30,centerVal-30),
+                        Scalar(centerHue+30, centerSat+30,centerVal+30), mask);
+
+
+                if( trackObject < 0 )
+                {
+                    Debug::info("Track object okey");
+                    Mat maskroi=mask.clone();
+
+                    calcHist(&trackSelectedRegionHue, 1,ch,maskroi, hist, 1, &hsize, &phranges);
+                    normalize(hist, hist, 0, 255, CV_MINMAX);
+
+
+                    trackWindow = selection;
+                    trackObject = 1;
+
+
+                }
+
+                /*
+                 namedWindow("hueRoi");
+                 imshow("hueRoi",hueRoi);
+                 namedWindow("satRoi");
+                 imshow("satRoi",satRoi);
+                 namedWindow("valRoi");
+                 imshow("valRoi",valRoi);*/
+
+                namedWindow("mask");
+                imshow("mask",mask);
+                calcBackProject(&trackSelectedRegionHue, 1, 0, hist, backproj, &phranges);
+                backproj &= mask;
+                Debug::info("Go camshift");
+                RotatedRect trackBox = CamShift(backproj, trackWindow,TermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ));
+                namedWindow("camshift");
+                imshow("camshift",backproj);
+                Debug::info("Camshift finish");
+                if( trackWindow.area() <= 1 )
+                {
+                    Debug::info("Objet perdu");
+                    int cols = backproj.cols, rows = backproj.rows, r = (MIN(cols, rows) + 5)/6;
+                    trackWindow = Rect(trackWindow.x - r, trackWindow.y - r,
+                                       trackWindow.x + r, trackWindow.y + r) &
+                            Rect(0, 0, cols, rows);
+
+                    rectangle(imageDraw,trackWindow,Scalar(0,0,255),5);
+
+                    color_define==true;
+                    break;
+
+                }
+                ellipse(trackSelectedWindow, trackBox, Scalar(0,0,255), 3, CV_AA );
+                namedWindow("frameDraw");
+                imshow("frameDraw",imageDraw);
             }
+            else if( trackObject < 0 )
+                paused = false;
+
+
+            if( selectObject && selection.width > 0 && selection.height > 0 )
+            {
+                Mat roi(image, selection);
+                bitwise_not(roi, roi);
+            }
+            /*
+            if (imageDraw.empty()){
+                 std::cout << "okey" << std::endl;
+                imageDraw=image.clone();
+            }
+            namedWindow("frameDraw");
+            imshow("frameDraw",imageDraw);*/
         }
 
+
+
+        if (save){
+            video << image;
+        }
+
+
+
+
+
         imshow("frame",image);
+        //  waitKey(30);
         waitKey(0);
         char c = (char)waitKey(10);
         if( c == 27 )
             break;
+        switch(c)
+        {
+        case 'd':
+            trackObject=0;
+            break;
 
+        case 'p':
+            paused = !paused;
+            break;
+        default:
+            ;
+        }
+
+    }
+
+    if (save){
+        video.release();
     }
 
     return 0;
