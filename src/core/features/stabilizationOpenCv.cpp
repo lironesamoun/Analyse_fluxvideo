@@ -37,7 +37,7 @@ void StabilizationOpenCv::run()
     VideoWriter writer(outputPath, CV_FOURCC('X','V','I','D'),11,stabilizedFrames->nextFrame().size());
     if ( !writer.isOpened() ) //if not initialize the VideoWriter successfully, exit the program
     {
-        drone_error("ERROR: Failed to write the video");
+        imageretrieval_error("ERROR: Failed to write the video");
 
     }
     while (!(stabilizedFrame = stabilizedFrames->nextFrame()).empty())

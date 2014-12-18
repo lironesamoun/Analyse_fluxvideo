@@ -19,8 +19,8 @@ namespace drone {
 
 void ensure_error(const char* file, const int line, const char* function, const char* what, int code=-1);
 void fatal_error(const char* file, const int line, const char* function,const char* what, int code=-1);
-void drone_error(const std::string& what);
-void drone_warning(const std::string& what);
+void imageretrieval_error(const std::string& what);
+void imageretrieval_warning(const std::string& what);
 
 /**
   * This function converts any class or data type to a string. In C++11,

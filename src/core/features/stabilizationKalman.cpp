@@ -151,12 +151,12 @@ void StabilizationKalman::init(){
     // Size frameSize(static_cast<int>(prevFrameColor.cols*2+10), static_cast<int>(prevFrameColor.rows));
     VideoWriter video;
     if (save){
-        Size frameSize(static_cast<int>(prevFrameColor.cols), static_cast<int>(prevFrameColor.rows));
-        video =VideoWriter (outputPath,CV_FOURCC('M', 'P', 'E', 'G'),20, frameSize,true);
+        Size frameSize(static_cast<int>(prevFrameColor.cols*2+10), static_cast<int>(prevFrameColor.rows));
+        video =VideoWriter (outputPath,CV_FOURCC('D', 'I', 'V', 'X'),20, frameSize,true);
 
-        if ( !video.isOpened() ) //if not initialize the VideoWriter successfully, exit the program
+        if ( !video.isOpened() || outputPath.empty()) //if not initialize the VideoWriter successfully, exit the program
         {
-            drone_error("ERROR: Failed to write the video");
+            imageretrieval_error("ERROR: Failed to write the video");
 
         }
 
@@ -166,29 +166,29 @@ void StabilizationKalman::init(){
     // Get mask in order to compute features ( 4 little mask in the picture, see the function for more details)
     cv::Mat mask=VideoUtil::computeMask(prevFrameGray,230,400);
 
-    int border = HORIZONTAL_BORDER_CROP * prevFrameGray.rows / prevFrameGray.cols; // get the aspect ratio correct
-
+  //  int border = HORIZONTAL_BORDER_CROP * prevFrameGray.rows / prevFrameGray.cols; // get the aspect ratio correct
+    int border=1;
     int compteur=0;
 
     // Init stockage
-    vector<Point2f> cornersPrev;//Stock features of previous frame
-    vector<Point2f> cornersPrev2;//Stock features of previous frame after remove bad points
-    cornersPrev.reserve(nb_max);
+    vector<Point2f> featuresPrevFrame;//Stock features of previous frame
+    vector<Point2f> featuresPrevFrame2;//Stock features of previous frame after remove bad points
+    featuresPrevFrame.reserve(nb_max);
 
-    vector<Point2f> cornersCurr;//Stock features of current frame
-    vector<Point2f> cornersCurr2;//Stock features of current frame after remove bad points
-    cornersCurr.reserve(nb_max);
+    vector<Point2f> featuresCurrentFrame;//Stock features of current frame
+    vector<Point2f> featuresCurrentFrame2;//Stock features of current frame after remove bad points
+    featuresCurrentFrame.reserve(nb_max);
 
     // TermCriteria for optical Flow method
     TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
 
     /// Compute good features to track
-    cv::goodFeaturesToTrack(prevFrameGray,cornersPrev,nb_max,0.01,5.0,prevFrameGray);
+    cv::goodFeaturesToTrack(prevFrameGray,featuresPrevFrame,nb_max,0.01,5.0,prevFrameGray);
 
     /// Improve the accuracy of features
-    cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
+    cornerSubPix(prevFrameGray,featuresPrevFrame,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
 
-    ;
+
     // For all the frame
     while(compteur<nbre_frame){
         int nbreCurrentFrame=cap.get(CV_CAP_PROP_POS_FRAMES);//Get the number of current frame
@@ -218,60 +218,60 @@ void StabilizationKalman::init(){
         //(use the status parameter to find such cases).
 
         /// Track feature by computing the optical flow
-        calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,cornersPrev,cornersCurr,status,errors,Size(20,20),3,
+        calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,featuresPrevFrame,featuresCurrentFrame,status,errors,Size(20,20),3,
                              opticalFlowTermCriteria);
 
 
 
         // Remove bad matches
         for(size_t i=0; i < status.size(); i++) {
-            double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
+            double motion = sqrt(pow(featuresPrevFrame.at(i).x-featuresCurrentFrame.at(i).x,2)+pow(featuresPrevFrame.at(i).y-featuresCurrentFrame.at(i).y,2));
             if(status[i]) {
-                cornersPrev2.push_back(cornersPrev[i]);
-                cornersCurr2.push_back(cornersCurr[i]);
+                featuresPrevFrame2.push_back(featuresPrevFrame[i]);
+                featuresCurrentFrame2.push_back(featuresCurrentFrame[i]);
             }
         }
 
         /// If the number of features decrease, we re-compute features to track them (same step as above)
         if (compteur%50==0){
             std::cout << "okey " << std::endl;
-            cornersCurr2.clear();
-            cornersPrev2.clear();
-            cv::goodFeaturesToTrack(prevFrameGray,cornersPrev,nb_max,0.01,5.0,prevFrameGray);
+            featuresCurrentFrame2.clear();
+            featuresPrevFrame2.clear();
+            cv::goodFeaturesToTrack(prevFrameGray,featuresPrevFrame,nb_max,0.01,5.0,prevFrameGray);
 
             TermCriteria opticalFlowTermCriteria = TermCriteria(CV_TERMCRIT_ITER | CV_TERMCRIT_EPS,20,0.3);
 
-            cornerSubPix(prevFrameGray,cornersPrev,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
-            calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,cornersPrev,cornersCurr,status,errors,Size(20,20),3,
+            cornerSubPix(prevFrameGray,featuresPrevFrame,Size(15,15),Size(-1,-1),opticalFlowTermCriteria);
+            calcOpticalFlowPyrLK(prevFrameGray,currFrameGray,featuresPrevFrame,featuresCurrentFrame,status,errors,Size(20,20),3,
                                  opticalFlowTermCriteria);
 
             for(size_t i=0; i < status.size(); i++) {
-                double motion = sqrt(pow(cornersPrev.at(i).x-cornersCurr.at(i).x,2)+pow(cornersPrev.at(i).y-cornersCurr.at(i).y,2));
+                double motion = sqrt(pow(featuresPrevFrame.at(i).x-featuresCurrentFrame.at(i).x,2)+pow(featuresPrevFrame.at(i).y-featuresCurrentFrame.at(i).y,2));
                 if(status[i]) {
-                    cornersPrev2.push_back(cornersPrev[i]);
-                    cornersCurr2.push_back(cornersCurr[i]);
+                    featuresPrevFrame2.push_back(featuresPrevFrame[i]);
+                    featuresCurrentFrame2.push_back(featuresCurrentFrame[i]);
                 }
             }
 
         }
 
-        Debug::trace("Number of track feature cornerprev found: " + to_string(cornersPrev2.size()));
-/* namedWindow("Frame");
+        Debug::trace("Number of track feature cornerprev found: " + to_string(featuresPrevFrame2.size()));
+        /* namedWindow("Frame");
         imshow("Frame",currFrameGray);
         waitKey(0);*/
 
-        if (!cornersPrev2.empty()){
+        if (!featuresPrevFrame2.empty()){
 
             /// Draw features
             cv::Mat drawingPoint;
             currentColorImg.copyTo(drawingPoint);
             //cvtColor(drawingPoint,drawingPoint,CV_GRAY2RGB);
-            for( int i = 0; i < (int)cornersPrev2.size(); i++ )
+            for( int i = 0; i < (int)featuresPrevFrame2.size(); i++ )
             {
 
-                line (drawingPoint, cornersPrev2.at(i),
-                      cornersCurr2.at(i),cv::Scalar(0,0,255));
-                cv::circle(drawingPoint,cornersCurr2.at(i), 3, cv::Scalar(0,0,255),-1);
+                line (drawingPoint, featuresPrevFrame2.at(i),
+                      featuresCurrentFrame2.at(i),cv::Scalar(0,0,255));
+                cv::circle(drawingPoint,featuresCurrentFrame2.at(i), 3, cv::Scalar(0,0,255),-1);
             }
 
 
@@ -280,7 +280,7 @@ void StabilizationKalman::init(){
             imshow("drawingPoint",drawingPoint);
 
             /// Transformation matrix: estimate the rigid transform between the two frame
-            transformMatrix = estimateRigidTransform(cornersPrev2,cornersCurr2 ,false);
+            transformMatrix = estimateRigidTransform(featuresPrevFrame2,featuresCurrentFrame2 ,false);
 
             // If the transformation matrix is not found
             if(transformMatrix.data == NULL) {
@@ -359,8 +359,8 @@ void StabilizationKalman::init(){
 
 
                     //Display
-                    namedWindow("stabilized");
-                    imshow("stabilized",outImg);
+                    // namedWindow("stabilized");
+                    //imshow("stabilized",outImg);
 
                     /// change the frame
                     prevFrameColor= currentColorImg.clone();
@@ -381,13 +381,17 @@ void StabilizationKalman::init(){
 */
 
 
-                    // namedWindow("Stabilization");
-                    //imshow("Stabilization",canvas);
+                    namedWindow("Stabilization");
+                    imshow("Stabilization",canvas);
 
 
                     //  video.write(canvas);
                     if (save){
-                        video << outImg;
+
+                        //video << outImg;
+                        //video.write(canvas);
+                       video << canvas;
+                        Debug::trace("Save");
                     }
 
 
@@ -395,26 +399,28 @@ void StabilizationKalman::init(){
             }
         }
         // Delete the features, in order to re compute nb_max again
-        cornersPrev2.clear();
+        featuresPrevFrame2.clear();
 
-        cornersCurr2.clear();
+        featuresCurrentFrame2.clear();
 
 
         compteur++;
+
 
         // get the fps
         timerFPS.stopTimerFPS();
         timerFPS.getFPS();
 
         std::cout << "frame: " << nbreCurrentFrame << "/" << cap.get(CV_CAP_PROP_FRAME_COUNT) << std::endl;
-        if (nbreCurrentFrame>cap.get(CV_CAP_PROP_FRAME_COUNT) -5)
+        /*if (nbreCurrentFrame>cap.get(CV_CAP_PROP_FRAME_COUNT) -5)
         {
-            video.release();
             break;
-        }
+        }*/
 
 
+        waitKey(1000);
         if(waitKey(27) >= 0) break;
+
 
     }
     video.release();

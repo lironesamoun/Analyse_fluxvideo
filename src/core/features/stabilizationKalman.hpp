@@ -29,6 +29,7 @@ public:
     string outputPath;
     bool save;
 
+
 private:
     //void init_kalman(double x, double y);
     void init_kalman1(double x, double y,double teta);
@@ -36,7 +37,7 @@ private:
     //Point2f kalman_predict_correct(double x, double y);
 
 public:
-    static const int HORIZONTAL_BORDER_CROP = 30; // In pixels. Crops the border once the video is stabilized.
+    static const int HORIZONTAL_BORDER_CROP = 1; // In pixels. Crops the border once the video is stabilized.
 
 
 

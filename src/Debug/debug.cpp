@@ -47,7 +47,7 @@ void fatal_error(const char* file, const int line, const char* function, const c
 }
 
 
-void drone_warning(const std::string& what)
+void imageretrieval_warning(const std::string& what)
 {
     std::string msg = "WARNING: " + what;
     std::cout << msg << "\n";
@@ -56,7 +56,7 @@ void drone_warning(const std::string& what)
 
 
 
-void drone_error(const std::string& what)
+void imageretrieval_error(const std::string& what)
 {
     fatal_error(__FILE__, __LINE__, __FUNCTION__, what.c_str());
 }

@@ -1,6 +1,7 @@
 #include "opencv2/video/tracking.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include "utilities/inRange.hpp"
 #include "drone.hpp"
 
 #include <iostream>
@@ -61,6 +62,21 @@ static void onMouse( int event, int x, int y, int, void* )
         break;
     }
 }
+Rect checkCondition(Rect& trackbox,Mat& image){
+    if (trackbox.x < 0)
+        trackbox.x = 0;
+    if (trackbox.y < 0)
+        trackbox.y = 0;
+    if (trackbox.y + trackbox.height >= image.rows)
+        trackbox.height = image.rows - trackbox.y;
+    if (trackbox.x + trackbox.width >= image.cols)
+        trackbox.width = image.cols - trackbox.x;
+
+    return trackbox;
+
+}
+
+
 void on_trackbar( int, void* )
 {
 
@@ -98,23 +114,27 @@ int main( int argc, const char** argv )
 
     Rect trackWindow;
 
-    /*  int hbins = 30, sbins = 32; //number of bin
+    int hbins = 30, sbins = 9, vbins=30;//number of bin
     int histSize[] = {hbins, sbins};
     float hranges[] = { 0, 180 };//hue range
     float sranges[] = { 0, 256 };//Saturation range
+    float vranges[] = { 0, 256 }; //Value range
     const float* ranges[] = { hranges, sranges };//hue and saturation range
-    MatND hist= Mat::zeros(200,320,CV_8UC3);//Histogramme
-    int ch[] = { 0, 1 }; // Index for hue and saturation channel*/
-    int hsize = 32; //Number of bin
-    float hranges[] = {0,180};//Range value.  varies from 0 to 179
-    const float* phranges = hranges;
-    int ch[]={0}; //Index for hue channel
+    int nChannels=2;
+
+    int ch[] = { 0, 1}; // Index for hue and saturation channel*/
+    //int hsize = 32; //Number of bin
+    //float hranges[] = {0,180};//Range value.  varies from 0 to 179
+    //const float* phranges = hranges;
+    //int ch[]={0}; //Index for hue channel
 
 
-    string path="/home/sl001093/Documents/MAM5/PFE/videos/Merio/merio2.avi";
+
+    string path="/home/sl001093/Documents/MAM5/PFE/videos/Merio/merio9.avi";
     string outputPath="/home/sl001093/Documents/MAM5/PFE/videos/Merio/save.mp4";
     VideoCapture cap(path);
     int fpsOriginal=cap.get(CV_CAP_PROP_FPS);
+
 
     Mat frameRecord;
 
@@ -140,11 +160,12 @@ int main( int argc, const char** argv )
     namedWindow( "Histogram");
     namedWindow( "frame");
     setMouseCallback( "frame", onMouse);
+    createTrackbars();
 
-
+   // InRange::foundHSVcolor(frameRecord);
 
     Mat frame, hsvRoi,hsvImage,trackSelectedRegionHsv, trackSelectedRegionHue, hue, mask, backproj,hist;
-    Mat imageDraw;
+    Mat imageDraw, histimg = Mat::zeros(200, 320, CV_8UC3), histimgSat = Mat::zeros(200, 320, CV_8UC3);
     bool paused = false;
 
     for(;;)
@@ -162,21 +183,28 @@ int main( int argc, const char** argv )
 
         frame.copyTo(image);
 
+        const int width=image.cols;
+        const int height=image.rows;
         if( !paused )
         {
             //Noise reduction of windows
-            Size kSize;
+          /*  Size kSize;
             kSize.height = 5;
             kSize.width = 5;
             double sigma = 0.3*(3/2 - 1) + 0.8;
-            GaussianBlur(image,image,kSize,sigma,0.0,4);
-            cvtColor(image, hsvImage, COLOR_BGR2HSV);
+            GaussianBlur(image,image,kSize,sigma,0.0,4);*/
+            /// >>>>> Noise smoothing
+
+                cv::GaussianBlur(image,image, cv::Size(5, 5), 3.0, 3.0);
+                /// <<<<< Noise smoothing
+            cvtColor(image, hsvImage, COLOR_BGR2YUV);
 
 
             if( trackObject )
             {
-                int lw=100;
-                int lh=100;
+
+                int lw=1000;
+                int lh=1000;
                 imageDraw=image.clone();
                 /// Compute value of inRange
                 rectangle(imageDraw,selection,Scalar(255,255,255),2);
@@ -192,6 +220,9 @@ int main( int argc, const char** argv )
                 rectTrackRegion.width=selection.width/2 + lw + selection.width;
                 rectTrackRegion.height=selection.height/2 +lh + selection.height;
 
+                /// Check if the size is out of the actual window
+                rectTrackRegion=checkCondition(rectTrackRegion,image);
+
                 rectangle(imageDraw,rectTrackRegion,Scalar(255,0,0),2);
 
                 Mat roiSelected(image, selection),trackSelectedWindow(image,rectTrackRegion);
@@ -199,10 +230,10 @@ int main( int argc, const char** argv )
                 imshow("roi",roiSelected);
                 namedWindow("trackRegion");
                 imshow("trackRegion",trackSelectedWindow);
-                cvtColor(trackSelectedWindow, trackSelectedRegionHsv, CV_BGR2HSV); //HSV convertion for region around selected region
+                cvtColor(trackSelectedWindow, trackSelectedRegionHsv, CV_BGR2YUV); //HSV convertion for region around selected region
                 vector<Mat> channels1;
                 split(trackSelectedRegionHsv, channels1);
-                trackSelectedRegionHue = channels1[0];
+
                 // int ch[] = {0, 0};
                 //hueTrackSelected.create(trackSelectedRegionHsv.size(), trackSelectedRegionHsv.depth());
                 //mixChannels(&trackSelectedRegionHsv, 1, &hueTrackSelected, 1, ch, 1);
@@ -222,50 +253,99 @@ int main( int argc, const char** argv )
                     Mat valRoi = channels[2];
 
 
-                    centerHue=(int)hueRoi.at<uchar>(hueRoi.rows/2,hueRoi.cols/2);
-                    centerSat=(int)satRoi.at<uchar>(satRoi.rows/2,satRoi.cols/2);
+                    int mean_hue;
+                    int mean_sat;
+                    int sumHue=0;
+                    int sumSat=0;
+                    int compteurHue=0;
+                      int compteurSat=0;
+                    for (int i=0;i<hueRoi.rows;i++){
+                        for (int j=0;j<hueRoi.cols;j++){
+                            Debug::trace("val hue: " + to_string((int)hueRoi.at<uchar>(i,j)));
+                            sumHue+=(int)hueRoi.at<uchar>(i,j);
+                            compteurHue++;
+                        }
+                    }
+                    Debug::trace("sum hue: " + to_string(sumHue));
+                    mean_hue=sumHue/compteurHue;
+                    for (int i=0;i<satRoi.rows;i++){
+                        for (int j=0;j<satRoi.cols;j++){
+                            Debug::trace("val Sat: " + to_string((int)satRoi.at<uchar>(i,j)));
+                            sumSat+=(int)satRoi.at<uchar>(i,j);
+                            compteurSat++;
+                        }
+                    }
+                    Debug::trace("sum sat: " + to_string(sumSat));
+                    mean_sat=sumSat/compteurSat;
+                    Debug::trace("Mean hue: " + to_string(mean_hue) );
+                    Debug::trace("Mean Sat: " + to_string(mean_sat) );
+                   // centerHue=(int)hueRoi.at<uchar>(hueRoi.rows/2,hueRoi.cols/2);
+                     centerHue=mean_hue;
+                  //  centerSat=(int)satRoi.at<uchar>(satRoi.rows/2,satRoi.cols/2);
+                     centerSat=mean_sat;
                     centerVal=(int)valRoi.at<uchar>(valRoi.rows/2,valRoi.cols/2);
-                    /*
-                  std::cout << "region center hue: " << (centerHue) << std::endl;
-                   std::cout << "region center sat: " << (centerSat) << std::endl;
+
+                    std::cout << "region center hue: " << (centerHue) << std::endl;
+                    std::cout << "region center sat: " << (centerSat) << std::endl;
                     std::cout << "region center val: " << (centerVal) << std::endl;
-*/
+
                     color_define=true;
 
                 }
-                inRange(trackSelectedRegionHsv, Scalar(centerHue-30, centerSat-30,centerVal-30),
-                        Scalar(centerHue+30, centerSat+30,centerVal+30), mask);
-
-
+                int const rs=60;
+                int const rh=15;
+                //  inRange(trackSelectedRegionHsv, Scalar(0, 30,10), Scalar(hranges[1], sranges[1],256), mask);
+                inRange(trackSelectedRegionHsv,Scalar(centerHue-rh,centerSat-rs,0),Scalar(centerHue+rh,centerSat+rs,vranges[1]),mask);
+               // bitwise_not(mask,mask);
+                trackSelectedRegionHue.create(trackSelectedRegionHsv.size(), trackSelectedRegionHsv.depth());
                 if( trackObject < 0 )
                 {
                     Debug::info("Track object okey");
-                    Mat maskroi=mask.clone();
+                    //Mat maskroi=mask.clone();
+                    cv::Mat maskRoi;
+                    inRange(hsvRoi,Scalar(centerHue-rh,centerSat-rs,0),Scalar(centerHue+rh,centerSat+rs,vranges[1]),maskRoi);
+                 //  bitwise_not(maskRoi,maskRoi);
 
-                    calcHist(&trackSelectedRegionHue, 1,ch,maskroi, hist, 1, &hsize, &phranges);
+                    namedWindow("maskRoi");
+                    imshow("maskRoi",maskRoi);
+
+                    calcHist(&hsvRoi, 1, ch, maskRoi, hist, nChannels, histSize,ranges);
                     normalize(hist, hist, 0, 255, CV_MINMAX);
 
 
                     trackWindow = selection;
                     trackObject = 1;
 
+                    double maxVal=0;
+                    minMaxLoc(hist, 0, &maxVal, 0, 0);
+
+                    int scale = 10;
+                    Mat histImg = Mat::zeros(sbins*scale, hbins*10, CV_8UC3);
+
+                    for( int h = 0; h < hbins; h++ )
+                        for( int s = 0; s < sbins; s++ )
+                        {
+                            float binVal = hist.at<float>(h, s);
+                            int intensity = cvRound(binVal*255/maxVal);
+                            rectangle( histImg, Point(h*scale, s*scale),
+                                       Point( (h+1)*scale - 1, (s+1)*scale - 1),
+                                       Scalar::all(intensity),
+                                       CV_FILLED );
+                        }
+                    namedWindow( "H-S Histogram", 1 );
+                    imshow( "H-S Histogram", histImg );
+
 
                 }
 
-                /*
-                 namedWindow("hueRoi");
-                 imshow("hueRoi",hueRoi);
-                 namedWindow("satRoi");
-                 imshow("satRoi",satRoi);
-                 namedWindow("valRoi");
-                 imshow("valRoi",valRoi);*/
 
                 namedWindow("mask");
                 imshow("mask",mask);
-                calcBackProject(&trackSelectedRegionHue, 1, 0, hist, backproj, &phranges);
+                // calcBackProject(&trackSelectedRegionHue, 1, 0, hist, backproj, &phranges);
+                calcBackProject(&trackSelectedRegionHsv, 1,ch, hist, backproj,ranges);
+
                 backproj &= mask;
-                Debug::info("Go camshift");
-                RotatedRect trackBox = CamShift(backproj, trackWindow,TermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ));
+                RotatedRect trackBox = CamShift(backproj,trackWindow,TermCriteria( CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 10, 1 ));
                 namedWindow("camshift");
                 imshow("camshift",backproj);
                 Debug::info("Camshift finish");
@@ -273,14 +353,13 @@ int main( int argc, const char** argv )
                 {
                     Debug::info("Objet perdu");
                     int cols = backproj.cols, rows = backproj.rows, r = (MIN(cols, rows) + 5)/6;
-                    trackWindow = Rect(trackWindow.x - r, trackWindow.y - r,
-                                       trackWindow.x + r, trackWindow.y + r) &
+                    trackWindow = Rect(trackWindow.x - r, trackWindow.y - r,trackWindow.x + r, trackWindow.y + r) &
                             Rect(0, 0, cols, rows);
+                    trackObject=0;
 
-                    rectangle(imageDraw,trackWindow,Scalar(0,0,255),5);
-
+                    Debug::info("Trackwindow size" + to_string(trackWindow.area()));
                     color_define==true;
-                    break;
+                    //break;
 
                 }
                 ellipse(trackSelectedWindow, trackBox, Scalar(0,0,255), 3, CV_AA );
@@ -316,8 +395,8 @@ int main( int argc, const char** argv )
 
 
         imshow("frame",image);
-        //  waitKey(30);
-        waitKey(0);
+          waitKey(600);
+        //waitKey(0);
         char c = (char)waitKey(10);
         if( c == 27 )
             break;
